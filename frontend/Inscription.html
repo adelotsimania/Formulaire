@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription — FIMPISAVA</title>
+    <meta name="description" content="Formulaire d'inscription FIMPISAVA, association des étudiants de la région SAVA à Antananarivo.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="css/inscription.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+
+    <style>
+        .required-star {
+            color: #e74c3c;
+            margin-left: 3px;
+        }
+
+        /* Contour et fond rouge pour les champs en erreur */
+        .input-error {
+            border-color: #e74c3c !important;
+            background-color: #fdf2f2 !important;
+            outline: none;
+        }
+
+        /* Petit message sous les champs */
+        .error-text {
+            color: #e74c3c;
+            font-size: 0.82rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        /* Style pour encadrer la section formations si aucune n'est cochée */
+        .checkbox-group-error {
+            border: 1px solid #e74c3c !important;
+            background-color: #fdf2f2 !important;
+            padding: 10px;
+            border-radius: 8px;
+        }
+    </style>
+    <body>
+    <script>
+        (function () {
+            const saved = localStorage.getItem("fimpisava-theme");
+            if (saved === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <header class="mini-header">
+        <a href="index.html" class="mini-logo">
+            <img src="images/logo.jpg" alt="Logo FIMPISAVA">
+            <div class="logo-text">
+                <span>FIMPISAVA</span>
+                <small>Fikambanana Mpianatra SAVA</small>
+            </div>
+        </a>
+        <button id="theme-toggle-btn" class="theme-toggle-btn">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </header>
+
+    <main class="page">
+        <div class="page-intro">
+            <span class="eyebrow">FIMPISAVA</span>
+            <h1>Formulaire d'inscription</h1>
+            <p>Quelques informations suffisent pour vous inscrire à FIMPISAVA et accéder à nos formations.</p>
+        </div>
+
+        <form id="inscription-form" class="form" novalidate>
+
+            <fieldset class="block block-1">
+                <legend><span class="step-no">01</span> Informations personnelles</legend>
+
+                <div class="grid">
+                    <div class="input-box">
+                        <label for="nom">Nom <span class="required-star">*</span></label>
+                        <input type="text" id="nom" name="nom" required>
+                        <span class="error-text">Veuillez entrer un nom valide (au moins 2 lettres).</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="prenom">Prénom <span class="required-star">*</span></label>
+                        <input type="text" id="prenom" name="prenom" required>
+                        <span class="error-text">Veuillez entrer un prénom valide (au moins 2 lettres).</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="email">Email <span class="required-star">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="exemple@gmail.com" required>
+                        <span class="error-text">Veuillez entrer une adresse email valide (ex: nom@domaine.com).</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="tel">Téléphone <span class="required-star">*</span></label>
+                        <input type="tel" id="tel" name="tel" placeholder="03X XX XXX XX" required>
+                        <span class="error-text">Format de téléphone invalide (ex: 034 12 345 67).</span>
+                    </div>
+
+                    <div class="input-box full">
+                        <label for="adresse">Adresse à Antananarivo <span class="required-star">*</span></label>
+                        <input type="text" id="adresse" name="adresse" placeholder="Ex : Ankatso" required>
+                        <span class="error-text">Veuillez indiquer une adresse valide.</span>
+                    </div>
+                </div>
+                <!-- PRENDRE PHOTO -->
+                <div class="input-box full">
+                        <label>Photo de profil <span class="required-star">*</span></label>
+                        
+                        <div class="camera-container" id="camera-box">
+                            <button type="button" id="start-camera-btn" class="btn-camera">
+                                <i class="fa-solid fa-camera"></i> Activer la caméra
+                            </button>
+                            
+                            <video id="webcam" class="camera-video" autoplay playsinline style="display:none;"></video>
+                            <canvas id="photo-canvas" style="display:none;"></canvas>
+                            <img id="photo-preview" class="camera-preview" style="display:none;" alt="Photo capturée">
+                            
+                            <div class="camera-actions" style="display:none;" id="camera-actions">
+                                <button type="button" id="capture-btn" class="btn-camera">
+                                    <i class="fa-solid fa-circle-dot"></i> Prendre la photo
+                                </button>
+                                <button type="button" id="retake-btn" class="btn-camera btn-camera-secondary" style="display:none;">
+                                    <i class="fa-solid fa-rotate-right"></i> Refaire
+                                </button>
+                            </div>
+                        </div>
+ 
+                    
+                        <!-- Champ invisible où est stockée l'image -->
+                        <input type="hidden" id="photo-data" name="photoData" required>
+                        <span class="error-text" id="photo-error-text">Veuillez prendre une photo.</span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="block block-2">
+                <legend><span class="step-no">02</span> Origine géographique</legend>
+
+                <div class="grid">
+                    <div class="input-box">
+                        <label for="province">Province <span class="required-star">*</span></label>
+                        <input list="province-list" id="province" name="province" placeholder="Choisir..." required>
+                        <datalist id="province-list">
+                            <option value="Antananarivo">
+                            <option value="Toamasina">
+                            <option value="Mahajanga">
+                            <option value="Toliara">
+                            <option value="Antsiranana">
+                            <option value="Fianarantsoa">
+                        </datalist>
+                        <span class="error-text">Veuillez sélectionner une province.</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="region">Région d'origine <span class="required-star">*</span></label>
+                        <input type="text" id="region" name="region" placeholder="Ex : SAVA" required>
+                        <span class="error-text">Veuillez préciser votre région.</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="district">District <span class="required-star">*</span></label>
+                        <input type="text" id="district" name="district" placeholder="Ex : Sambava" required>
+                        <span class="error-text">Veuillez indiquer votre district.</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="sexe">Sexe <span class="required-star">*</span></label>
+                        <select id="sexe" name="sexe" required>
+                            <option value="" disabled selected>Sélectionner...</option>
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                        </select>
+                        <span class="error-text">Veuillez choisir votre sexe.</span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="block block-3">
+                <legend><span class="step-no">03</span> Formations souhaitées</legend>
+                <p class="block-hint">Sélectionnez <strong>2 langues max</strong>. L'informatique peut être ajoutée en 3ᵉ option.</p>
+
+                <div class="checkbox-group" id="langues-container">
+                    <p><strong>Langues (2 max) <span class="required-star">*</span> :</strong></p>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="langues" value="Français"> Français</label>
+                        <label><input type="checkbox" name="langues" value="Anglais"> Anglais</label>
+                        <label><input type="checkbox" name="langues" value="Allemand"> Allemand</label>
+                        <label><input type="checkbox" name="langues" value="Mandarin"> Mandarin</label>
+                        <label><input type="checkbox" name="langues" value="Espagnol"> Espagnol</label>
+                        <label><input type="checkbox" name="langues" value="Italien"> Italien</label>
+                        <label><input type="checkbox" name="langues" value="Russe"> Russe</label>
+                    </div>
+                    
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #e0e0e0;">
+                    
+                    <p><strong>Option informatique :</strong></p>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="informatique" value="Informatique"> Informatique</label>
+                    </div>
+                    
+                    <span class="error-text" id="langue-error-text">Veuillez choisir au moins une option de formation.</span>
+                </div>
+            </fieldset>
+
+            <button type="submit" id="submit-btn">S'inscrire</button>
+        </form>
+    </main>
+
+    <footer class="mini-footer">
+        <p>© 2026 FIMPISAVA — Fikambanana Mpianatra SAVA</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('inscription-form');
+            const langueCheckboxes = document.querySelectorAll('input[name="langues"]');
+            const infoCheckbox = document.querySelector('input[name="informatique"]');
+            const languesContainer = document.getElementById('langues-container');
+            const langueErrorText = document.getElementById('langue-error-text');
+
+            // --- EXPRESSIONS RÉGULIÈRES (REGEX) ---
+            const regexPatterns = {
+                // Lettres (y compris caractères accentués français), espaces et tirets (min 2 caractères)
+                nom: /^[a-zA-Zà-ÿÀ-Ÿ\s'-]{2,}$/,
+                prenom: /^[a-zA-Zà-ÿÀ-Ÿ\s'-]{2,}$/,
+                region: /^[a-zA-Zà-ÿÀ-Ÿ\s'-]{2,}$/,
+                district: /^[a-zA-Zà-ÿÀ-Ÿ\s'-]{2,}$/,
+                province: /^[a-zA-Zà-ÿÀ-Ÿ\s'-]{2,}$/,
+                
+                // Format email standard
+                email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                
+                // Numéro de téléphone Madagascar : 032, 033, 034, 037, 038 (avec ou sans espaces / tirets / points)
+                tel: /^(?:03[23478]|020)[0-9\s.-]{7,}$/,
+                
+                // Adresse (texte, chiffres et caractères spéciaux usuels)
+                adresse: /^.{3,}$/
+            };
+
+            // 1. Limitation des langues à 2 max
+            const handleCheckboxChange = () => {
+                const checkedLangues = document.querySelectorAll('input[name="langues"]:checked');
+                
+                if (checkedLangues.length > 0 || infoCheckbox.checked) {
+                    languesContainer.classList.remove('checkbox-group-error');
+                    langueErrorText.style.display = 'none';
+                }
+
+                if (checkedLangues.length >= 2) {
+                    langueCheckboxes.forEach(cb => {
+                        if (!cb.checked) cb.disabled = true;
+                    });
+                } else {
+                    langueCheckboxes.forEach(cb => cb.disabled = false);
+                }
+            };
+
+            langueCheckboxes.forEach(cb => cb.addEventListener('change', handleCheckboxChange));
+            if (infoCheckbox) infoCheckbox.addEventListener('change', handleCheckboxChange);
+
+            // 2. Masquer les erreurs lors de la saisie
+            form.querySelectorAll('input, select').forEach(field => {
+                field.addEventListener('input', () => {
+                    field.classList.remove('input-error');
+                    const errorMsg = field.parentElement.querySelector('.error-text');
+                    if (errorMsg) errorMsg.style.display = 'none';
+                });
+            });
+
+            // 3. Validation globale au Submit avec REGEX
+            form.addEventListener('submit', (e) => {
+                let isValid = true;
+                let firstErrorElement = null;
+
+                // Réinitialiser le style d'erreur
+                form.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+                form.querySelectorAll('.error-text').forEach(el => el.style.display = 'none');
+                languesContainer.classList.remove('checkbox-group-error');
+
+                // Validation par REGEX des champs texte/select
+                const requiredFields = form.querySelectorAll('input[required], select[required]');
+                
+                requiredFields.forEach(field => {
+                    const value = field.value.trim();
+                    const fieldName = field.name;
+                    const pattern = regexPatterns[fieldName];
+
+                    let isFieldValid = true;
+
+                    if (!value) {
+                        isFieldValid = false; // Champ vide
+                    } else if (pattern && !pattern.test(value)) {
+                        isFieldValid = false; // Non conforme au REGEX
+                    }
+
+                    if (!isFieldValid) {
+                        isValid = false;
+                        field.classList.add('input-error');
+
+                        const errorMsg = field.parentElement.querySelector('.error-text');
+                        if (errorMsg) errorMsg.style.display = 'block';
+
+                        if (!firstErrorElement) firstErrorElement = field;
+                    }
+                });
+
+                // Validation des options de formations
+                const checkedLangues = document.querySelectorAll('input[name="langues"]:checked');
+                const checkedInfo = document.querySelector('input[name="informatique"]:checked');
+
+                if (checkedLangues.length === 0 && !checkedInfo) {
+                    isValid = false;
+                    languesContainer.classList.add('checkbox-group-error');
+                    langueErrorText.style.display = 'block';
+                    if (!firstErrorElement) firstErrorElement = languesContainer;
+                }
+
+                // Empêcher l'envoi du formulaire s'il y a des erreurs
+                if (!isValid) {
+                    e.preventDefault();
+                    if (firstErrorElement) {
+                        firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="js/config.js"></script>
+    <script src="js/Inscription.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const startCameraBtn = document.getElementById('start-camera-btn');
+            const video = document.getElementById('webcam');
+            const canvas = document.getElementById('photo-canvas');
+            const preview = document.getElementById('photo-preview');
+            const captureBtn = document.getElementById('capture-btn');
+            const retakeBtn = document.getElementById('retake-btn');
+            const cameraActions = document.getElementById('camera-actions');
+            const photoDataInput = document.getElementById('photo-data');
+            const cameraBox = document.getElementById('camera-box');
+            let streamTrack = null;
+
+            // 1. Activer la Caméra
+            startCameraBtn.addEventListener('click', async () => {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 300, height: 300 }, audio: false });
+                    video.srcObject = stream;
+                    streamTrack = stream.getTracks()[0];
+                    startCameraBtn.style.display = 'none';
+                    video.style.display = 'block';
+                    cameraActions.style.display = 'flex';
+                    captureBtn.style.display = 'inline-flex';
+                    retakeBtn.style.display = 'none';
+                    preview.style.display = 'none';
+                } catch (err) {
+                    alert("Erreur d'accès à la caméra.");
+                }
+            });
+
+            // 2. Prendre la photo avec compression
+            captureBtn.addEventListener('click', () => {
+                canvas.width = 150;  // Taille réduite exprès pour être léger
+                canvas.height = 150;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, 150, 150);
+
+                // Compression haute qualité mais ultra légère en taille texte
+                const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
+                photoDataInput.value = compressedBase64;
+
+                preview.src = compressedBase64;
+                preview.style.display = 'block';
+                video.style.display = 'none';
+                captureBtn.style.display = 'none';
+                retakeBtn.style.display = 'inline-flex';
+
+                if (streamTrack) streamTrack.stop();
+                cameraBox.classList.remove('input-error');
+            });
+
+            // 3. Recommencer
+            retakeBtn.addEventListener('click', () => {
+                photoDataInput.value = '';
+                preview.style.display = 'none';
+                startCameraBtn.click();
+            });
+        });
+    </script>
+    <script src="js/dark-toggle.js"></script>
+
+</body>
+</html>

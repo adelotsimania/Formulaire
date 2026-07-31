@@ -1,0 +1,701 @@
+/* =========================================================
+   FIMPISAVA — Langues & Informatique
+   Palette : encre navy + vert baobab + or mangue (touche corail fine)
+   Police  : Fraunces (titres) / Sora (texte) / Space Mono (étiquettes)
+   Signature : frise "Parcours FIMPISAVA" en étapes reliées
+   ========================================================= */
+
+:root {
+    --navy: #16324F;
+    --navy-soft: #1E4266;
+    --green: #2E7D5B;
+    --green-dark: #235F45;
+    --gold: #F2A93B;
+    --clay: #E8674B;
+    --cream: #FBF6EC;
+    --white: #FFFFFF;
+    --ink: #23303D;
+    --ink-soft: #5B6B7A;
+    --line: #E7E1D3;
+
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --shadow-soft: 0 12px 28px rgba(22, 50, 79, 0.08);
+    --shadow-hover: 0 18px 36px rgba(22, 50, 79, 0.14);
+
+    --font-title: 'Fraunces', serif;
+    --font-body: 'Sora', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.65;
+    overflow-x: hidden;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-title);
+    color: var(--navy);
+    line-height: 1.15;
+    font-weight: 600;
+}
+
+em {
+    font-style: italic;
+    color: var(--green);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    background: rgba(46, 125, 91, 0.08);
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+.eyebrow.center {
+    display: block;
+    text-align: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    margin-bottom: 3rem;
+}
+
+.why h2, .parcours h2, .services h2, .contact h2 {
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* ================= HEADER ================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 6%;
+    background: var(--navy);
+    box-shadow: var(--shadow-soft);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.logo img {
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.logo h2 {
+    font-size: 1.3rem;
+    color: var(--white);
+}
+
+.logo-sub {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+}
+
+header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 2.2rem;
+}
+
+header nav ul li a {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.88);
+    padding: 0.4rem 0;
+    position: relative;
+    transition: color 0.25s ease;
+}
+
+header nav ul li a:not(.btn-menu)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 3px;
+    transition: width 0.25s ease;
+}
+
+header nav ul li a:not(.btn-menu):hover {
+    color: var(--gold);
+}
+
+header nav ul li a:not(.btn-menu):hover::after {
+    width: 100%;
+}
+
+.btn-menu {
+    background: var(--gold);
+    color: var(--navy) !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.btn-menu:hover {
+    background: #ffb84f;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--white);
+    cursor: pointer;
+}
+
+/* ================= HERO ================= */
+
+/* ================= HERO (MODIFIÉ SELON L'IMAGE) ================= */
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 1.5rem;
+    min-height: 80vh; /* Hauteur ajustée pour couvrir la bannière */
+    position: relative;
+    
+    /* Image de fond avec filtre sombre (overlay) */
+    background: 
+        linear-gradient(rgba(10, 25, 47, 0.75), rgba(10, 25, 47, 0.75)), 
+        url('../images/ecole.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--white);
+}
+
+.hero-text {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Badge jaune/orange au-dessus du titre */
+.hero .eyebrow {
+    background: var(--gold);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+}
+
+/* Titre principal blanc et centré */
+.hero-text h1 {
+    color: var(--white);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+}
+
+/* Sous-titre / description */
+.hero-lead {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.15rem;
+    max-width: 650px;
+    margin: 0 auto 2rem auto;
+}
+
+/* Alignement du bouton principal au centre */
+.hero-cta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+/* Style du bouton d'action orange */
+.hero-cta .btn {
+    background: #E8674B; /* Couleur orange/corail similaire à l'image */
+    color: var(--white);
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(232, 103, 75, 0.4);
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.hero-cta .btn:hover {
+    background: #d45337;
+    transform: translateY(-2px);
+}
+/* ================= POURQUOI NOUS CHOISIR / CARDS ================= */
+
+.why, .services {
+    padding: 5rem 6%;
+    text-align: center;
+}
+
+.why {
+    background: var(--cream);
+}
+
+.cards {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 2.4rem 1.8rem;
+    width: 270px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-bottom: 4px solid transparent;
+}
+
+.services .card {
+    background: var(--cream);
+}
+
+.why .card:nth-child(1) { border-bottom-color: var(--navy); }
+.why .card:nth-child(2) { border-bottom-color: var(--green); }
+.why .card:nth-child(3) { border-bottom-color: var(--gold); }
+
+.services .card:nth-child(1) { border-bottom-color: var(--green); }
+.services .card:nth-child(2) { border-bottom-color: var(--navy); }
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card i {
+    font-size: 1.9rem;
+    color: var(--white);
+    background: var(--navy);
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto 1.2rem;
+}
+
+.why .card:nth-child(2) i { background: var(--green); }
+.why .card:nth-child(3) i { background: var(--gold); }
+.services .card:nth-child(1) i { background: var(--green); }
+
+.card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+}
+
+.card p {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+}
+
+/* ================= PARCOURS (signature) ================= */
+
+.parcours {
+    padding: 5.5rem 6%;
+    text-align: center;
+}
+
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 34px;
+    left: 6%;
+    right: 6%;
+    height: 2px;
+    background: repeating-linear-gradient(
+        to right,
+        var(--line) 0,
+        var(--line) 8px,
+        transparent 8px,
+        transparent 16px
+    );
+    z-index: 0;
+}
+
+.step {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+}
+
+.step-marker {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--navy);
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin: 0 auto 1rem;
+    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.step:nth-child(odd) .step-marker { border-color: var(--green); color: var(--green); }
+.step:nth-child(even) .step-marker { border-color: var(--gold); color: var(--gold); }
+
+.step:hover .step-marker {
+    background: var(--navy);
+    color: var(--white);
+    transform: translateY(-4px);
+}
+
+.step h3 {
+    font-size: 1.02rem;
+    margin-bottom: 0.4rem;
+}
+
+.step p {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    max-width: 190px;
+    margin: 0 auto;
+}
+
+/* ================= CONTACT ================= */
+
+.contact {
+    padding: 5rem 6%;
+    text-align: center;
+    background: var(--cream);
+}
+
+.contact-box {
+    display: flex;
+    justify-content: center;
+    gap: 2.2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.contact-box > div {
+    background: var(--white);
+    padding: 2rem 1.8rem;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+    min-width: 220px;
+    transition: transform 0.3s ease;
+}
+
+.contact-box > div:hover {
+    transform: translateY(-5px);
+}
+
+.contact-box i {
+    font-size: 1.6rem;
+    color: var(--clay);
+    margin-bottom: 0.8rem;
+}
+
+.contact-box p {
+    color: var(--ink-soft);
+    font-weight: 600;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: var(--navy);
+    color: #C9D3DC;
+    padding: 4rem 6% 1.5rem;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    padding-bottom: 2rem;
+}
+
+.footer-logo h2 {
+    color: var(--gold);
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+}
+
+.footer-logo p {
+    color: #9FADB9;
+}
+
+footer h3 {
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.footer-links, .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.footer-links a, .footer-contact p {
+    color: #9FADB9;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--gold);
+}
+
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-social a {
+    display: inline-flex;
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-top: 0.2rem;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.footer-social a:hover {
+    background: var(--gold);
+    color: var(--navy);
+    transform: translateY(-3px);
+}
+
+footer hr {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin-bottom: 1.2rem;
+}
+
+.copyright {
+    text-align: center;
+    color: #7C8B99;
+    font-size: 0.85rem;
+    padding-bottom: 0.5rem;
+}
+
+/* ================= FOCUS VISIBLE (accessibilité) ================= */
+
+a:focus-visible, .menu-toggle:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 3.5rem;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-cta, .hero-stats {
+        justify-content: center;
+    }
+
+    .hero-image {
+        order: -1;
+        width: 100%;
+    }
+
+    .timeline {
+        flex-direction: column;
+        gap: 2.2rem;
+        align-items: center;
+    }
+
+    .timeline::before {
+        top: 0;
+        bottom: 0;
+        left: 34px;
+        right: auto;
+        width: 2px;
+        height: auto;
+        background: repeating-linear-gradient(
+            to bottom,
+            var(--line) 0,
+            var(--line) 8px,
+            transparent 8px,
+            transparent 16px
+        );
+    }
+
+    .step {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        text-align: left;
+        min-width: 0;
+        width: 100%;
+        max-width: 380px;
+    }
+
+    .step-marker {
+        margin: 0;
+        flex-shrink: 0;
+    }
+
+    .step p {
+        max-width: none;
+    }
+}
+
+@media (max-width: 768px) {
+    header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--navy);
+        box-shadow: var(--shadow-soft);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+    }
+
+    header nav.active {
+        max-height: 420px;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem 6%;
+        gap: 1.2rem;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .contact-box {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 3rem 6% 4.5rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn, .btn-ghost {
+        width: 100%;
+        text-align: center;
+    }
+
+    .card {
+        width: 100%;
+    }
+}

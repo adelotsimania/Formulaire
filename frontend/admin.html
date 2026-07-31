@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration — FIMPISAVA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+</head>
+<body>
+    <script>
+        // Applique le thème sauvegardé immédiatement, avant le rendu, pour éviter un flash
+        (function () {
+            const saved = localStorage.getItem("fimpisava-theme");
+            if (saved === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+
+    <div id="login-box">
+        <h2>Espace Administration</h2>
+        <p class="subtitle">FIMPISAVA — connectez-vous pour continuer</p>
+        <label for="username">Identifiant</label>
+        <input type="text" id="username" placeholder="admin">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" placeholder="••••••••">
+        <button onclick="login()">Se connecter</button>
+        <div id="error"></div>
+    </div>
+
+    <div id="dashboard" style="display:none;">
+        <div class="topbar">
+            <div class="brand">
+                <div class="brand-mark">FS</div>
+                <div>
+                    <h1>Administration FIMPISAVA</h1>
+                    <small>Fikambanana Mpianatra SAVA</small>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="theme-toggle" title="Changer de thème">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="logout-btn" onclick="logout()">Déconnexion</button>
+            </div>
+        </div>
+
+        <div class="dashboard-inner">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="label">Adhésions</div>
+                    <div class="value" id="stat-adhesions">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Inscrits aux formations</div>
+                    <div class="value" id="stat-formations">—</div>
+                </div>
+            </div>
+
+            <div class="nav">
+                <button id="tab-adhesions" class="active" onclick="loadData('adhesions')">Adhésions</button>
+                <button id="tab-formations" onclick="loadData('formations')">Inscriptions Formations</button>
+            </div>
+
+            <div class="table-card">
+                <div class="table-card-header">
+                    <h2 id="title">Membres Ayant Adhéré à FIMPISAVA</h2>
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search-input" placeholder="Rechercher par nom, email, téléphone...">
+                        <button id="search-clear" type="button" title="Effacer">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="table-container">Chargement...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale d'agrandissement de la photo -->
+    <div id="photo-modal" class="modal-overlay" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img id="modal-img" src="" alt="Agrandissement photo">
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/admin.js"></script>
+
+</body>
+</html>

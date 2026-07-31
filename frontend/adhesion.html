@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adhésion — FIMPISAVA</title>
+    <meta name="description" content="Formulaire d'adhésion FIMPISAVA, association des étudiants de la région SAVA à Antananarivo.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="css/inscription.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+
+    <style>
+        .required-star {
+            color: #e74c3c;
+            margin-left: 3px;
+        }
+        .input-error {
+            border-color: #e74c3c !important;
+            background-color: #fdf2f2 !important;
+            outline: none;
+        }
+        .error-text {
+            color: #e74c3c;
+            font-size: 0.82rem;
+            margin-top: 4px;
+            display: none;
+        }
+        #message-box {
+            display: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        (function () {
+            const saved = localStorage.getItem("fimpisava-theme");
+            if (saved === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+
+    <header class="mini-header">
+        <a href="index.html" class="mini-logo">
+            <img src="images/logo.jpg" alt="Logo FIMPISAVA">
+            <div class="logo-text">
+                <span>FIMPISAVA</span>
+                <small>Fikambanana Mpianatra SAVA</small>
+            </div>
+        </a>
+        <button id="theme-toggle-btn" class="theme-toggle-btn">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </header>
+
+    <main class="page">
+        <div class="page-intro">
+            <span class="eyebrow">FIMPISAVA</span>
+            <h1>Formulaire d'adhésion</h1>
+            <p>Quelques informations suffisent pour devenir membre de l'association FIMPISAVA.</p>
+        </div>
+
+        <!-- Zone pour afficher les messages d'erreur ou succès -->
+        <div id="message-box"></div>
+
+        <form id="adhesion-form" class="form" novalidate>
+
+            <!-- BLOCK 1 : INFORMATIONS PERSONNELLES -->
+            <fieldset class="block block-1">
+                <legend><span class="step-no">01</span> Informations personnelles</legend>
+
+                <div class="grid">
+                    <div class="input-box">
+                        <label for="nom">Nom <span class="required-star">*</span></label>
+                        <input type="text" id="nom" name="nom" required>
+                        <span class="error-text">Veuillez entrer un nom valide (au moins 2 lettres).</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="prenom">Prénom <span class="required-star">*</span></label>
+                        <input type="text" id="prenom" name="prenom" required>
+                        <span class="error-text">Veuillez entrer un prénom valide (au moins 2 lettres).</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="email">Email <span class="required-star">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="exemple@gmail.com" required>
+                        <span class="error-text">Veuillez entrer une adresse email valide.</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="tel">Téléphone <span class="required-star">*</span></label>
+                        <input type="tel" id="tel" name="tel" placeholder="03X XX XXX XX" required>
+                        <span class="error-text">Format de téléphone invalide (ex: 034 12 345 67).</span>
+                    </div>
+
+                    <div class="input-box full">
+                        <label for="adresse">Adresse à Antananarivo <span class="required-star">*</span></label>
+                        <input type="text" id="adresse" name="adresse" placeholder="Ex : Ankatso" required>
+                        <span class="error-text">Veuillez indiquer une adresse valide.</span>
+                    </div>
+                </div>
+
+                <!-- CAMÉRA ET PHOTO -->
+                <div class="input-box full" style="margin-top: 20px;">
+                    <label>Photo de profil <span class="required-star">*</span></label>
+
+                    <div class="camera-container" id="camera-box">
+                        <button type="button" id="start-camera-btn" class="btn-camera">
+                            <i class="fa-solid fa-camera"></i> Activer la caméra
+                        </button>
+
+                        <video id="webcam" class="camera-video" autoplay playsinline style="display:none;"></video>
+                        <canvas id="photo-canvas" style="display:none;"></canvas>
+                        <img id="photo-preview" class="camera-preview" style="display:none;" alt="Photo capturée">
+
+                        <div class="camera-actions" style="display:none;" id="camera-actions">
+                            <button type="button" id="capture-btn" class="btn-camera">
+                                <i class="fa-solid fa-circle-dot"></i> Prendre la photo
+                            </button>
+                            <button type="button" id="retake-btn" class="btn-camera btn-camera-secondary" style="display:none;">
+                                <i class="fa-solid fa-rotate-right"></i> Refaire
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Champ invisible où est stockée l'image -->
+                    <input type="hidden" id="photo-data" name="photoData" required>
+                    <span class="error-text" id="photo-error-text">Veuillez prendre une photo.</span>
+                </div>
+            </fieldset>
+
+            <!-- BLOCK 2 : ORIGINE & ÉTUDES -->
+            <fieldset class="block block-2">
+                <legend><span class="step-no">02</span> Origine géographique & Études</legend>
+
+                <div class="grid">
+                    <div class="input-box">
+                        <label for="province">Province <span class="required-star">*</span></label>
+                        <input list="province-list" id="province" name="province" placeholder="Choisir..." required>
+                        <datalist id="province-list">
+                            <option value="Antsiranana">
+                            <option value="Antananarivo">
+                            <option value="Toamasina">
+                            <option value="Mahajanga">
+                            <option value="Toliara">
+                            <option value="Fianarantsoa">
+                        </datalist>
+                        <span class="error-text">Veuillez sélectionner une province.</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="region">Région d'origine <span class="required-star">*</span></label>
+                        <input type="text" id="region" name="region" placeholder="Ex : SAVA" required>
+                        <span class="error-text">Veuillez préciser votre région.</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="district">District <span class="required-star">*</span></label>
+                        <input type="text" id="district" name="district" placeholder="Ex : Sambava" required>
+                        <span class="error-text">Veuillez indiquer votre district.</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="sexe">Sexe <span class="required-star">*</span></label>
+                        <select id="sexe" name="sexe" required>
+                            <option value="" disabled selected>Sélectionner...</option>
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                        </select>
+                        <span class="error-text">Veuillez choisir votre sexe.</span>
+                    </div>
+
+                    <!-- CHAMP FILIÈRE D'ÉTUDE -->
+                    <div class="input-box full">
+                        <label for="filiere">Filière / Mention d'étude <span class="required-star">*</span></label>
+                        <input type="text" id="filiere" name="filiere" placeholder="Ex : Informatique, Droit, Gestion, Economie..." required>
+                        <span class="error-text">Veuillez renseigner votre filière d'étude.</span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <button type="submit" id="submit-btn">S'inscrire</button>
+        </form>
+    </main>
+
+    <footer class="mini-footer">
+        <p>© 2026 FIMPISAVA — Fikambanana Mpianatra SAVA</p>
+    </footer>
+
+    <!-- Chargement des scripts JS -->
+    <script src="js/config.js"></script>
+    <script src="js/adhesion.js"></script>
+    <script src="js/dark-toggle.js"></script>
+</body>
+</html>

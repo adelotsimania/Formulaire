@@ -1,0 +1,765 @@
+/* =========================================================
+   FIMPISAVA — Formulaire d'adhésion
+   Même système que accueil.css : navy / vert baobab / or mangue
+   ========================================================= */
+
+:root {
+    --navy: #16324F;
+    --navy-soft: #1E4266;
+    --green: #2E7D5B;
+    --green-dark: #235F45;
+    --gold: #F2A93B;
+    --clay: #E8674B;
+    --cream: #FBF6EC;
+    --white: #FFFFFF;
+    --ink: #23303D;
+    --ink-soft: #5B6B7A;
+    --line: #E7E1D3;
+
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --shadow-soft: 0 12px 28px rgba(22, 50, 79, 0.08);
+    --shadow-hover: 0 18px 36px rgba(22, 50, 79, 0.14);
+
+    --font-title: 'Fraunces', serif;
+    --font-body: 'Sora', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================= MINI HEADER ================= */
+
+.mini-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 6%;
+    background: var(--navy);
+    box-shadow: var(--shadow-soft);
+}
+
+.mini-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.mini-logo img {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+}
+
+.mini-logo .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.mini-logo .logo-text span {
+    font-family: var(--font-title);
+    font-weight: 600;
+    color: var(--white);
+    font-size: 1.05rem;
+}
+
+.mini-logo .logo-text small {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+}
+
+.back-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.back-link:hover {
+    color: var(--gold);
+    transform: translateX(-3px);
+}
+
+/* ================= PAGE ================= */
+
+.page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3.5rem 6% 5rem;
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 2.6rem;
+    animation: fadeUp 0.6s ease both;
+}
+
+.eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    background: rgba(46, 125, 91, 0.08);
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+.page-intro h1 {
+    font-family: var(--font-title);
+    font-weight: 600;
+    color: var(--navy);
+    font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+    margin-bottom: 0.7rem;
+}
+
+.page-intro p {
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ================= FORM ================= */
+
+.form {
+    background: var(--white);
+    padding: 2.4rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.block {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--navy);
+    border-radius: var(--radius-md);
+    padding: 1.8rem 1.8rem 1.6rem;
+    margin-bottom: 1.6rem;
+    animation: fadeUp 0.6s ease both;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.block:hover {
+    box-shadow: var(--shadow-soft);
+}
+
+.block-1 { border-left-color: var(--navy); animation-delay: 0.05s; }
+.block-2 { border-left-color: var(--green); animation-delay: 0.15s; }
+.block-3 { border-left-color: var(--gold); animation-delay: 0.25s; }
+.block-4 { border-left-color: var(--clay); animation-delay: 0.35s; }
+
+legend {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0 0.4rem;
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--navy);
+}
+
+.step-no {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--white);
+    background: var(--navy);
+    padding: 0.25rem 0.55rem;
+    border-radius: 50px;
+}
+
+.block-2 .step-no { background: var(--green); }
+.block-3 .step-no { background: var(--gold); color: var(--navy); }
+.block-4 .step-no { background: var(--clay); }
+
+.block-hint {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin: 0.6rem 0 1rem;
+}
+/* =========================================================
+   FIMPISAVA — Formulaire d'adhésion
+   Même système que accueil.css : navy / vert baobab / or mangue
+   ========================================================= */
+
+:root {
+    --navy: #16324F;
+    --navy-soft: #1E4266;
+    --green: #2E7D5B;
+    --green-dark: #235F45;
+    --gold: #F2A93B;
+    --clay: #E8674B;
+    --cream: #FBF6EC;
+    --white: #FFFFFF;
+    --ink: #23303D;
+    --ink-soft: #5B6B7A;
+    --line: #E7E1D3;
+
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --shadow-soft: 0 12px 28px rgba(22, 50, 79, 0.08);
+    --shadow-hover: 0 18px 36px rgba(22, 50, 79, 0.14);
+
+    --font-title: 'Fraunces', serif;
+    --font-body: 'Sora', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================= MINI HEADER ================= */
+
+.mini-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 6%;
+    background: var(--navy);
+    box-shadow: var(--shadow-soft);
+}
+
+.mini-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.mini-logo img {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+}
+
+.mini-logo .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.mini-logo .logo-text span {
+    font-family: var(--font-title);
+    font-weight: 600;
+    color: var(--white);
+    font-size: 1.05rem;
+}
+
+.mini-logo .logo-text small {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+}
+
+.back-link {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.back-link:hover {
+    color: var(--gold);
+    transform: translateX(-3px);
+}
+
+/* ================= PAGE ================= */
+
+.page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3.5rem 6% 5rem;
+}
+
+.page-intro {
+    text-align: center;
+    margin-bottom: 2.6rem;
+    animation: fadeUp 0.6s ease both;
+}
+
+.eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--green);
+    background: rgba(46, 125, 91, 0.08);
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+.page-intro h1 {
+    font-family: var(--font-title);
+    font-weight: 600;
+    color: var(--navy);
+    font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+    margin-bottom: 0.7rem;
+}
+
+.page-intro p {
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ================= FORM ================= */
+
+.form {
+    background: var(--white);
+    padding: 2.4rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.block {
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--navy);
+    border-radius: var(--radius-md);
+    padding: 1.8rem 1.8rem 1.6rem;
+    margin-bottom: 1.6rem;
+    animation: fadeUp 0.6s ease both;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.block:hover {
+    box-shadow: var(--shadow-soft);
+}
+
+.block-1 { border-left-color: var(--navy); animation-delay: 0.05s; }
+.block-2 { border-left-color: var(--green); animation-delay: 0.15s; }
+.block-3 { border-left-color: var(--gold); animation-delay: 0.25s; }
+
+legend {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0 0.4rem;
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--navy);
+}
+
+.step-no {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--white);
+    background: var(--navy);
+    padding: 0.25rem 0.55rem;
+    border-radius: 50px;
+}
+
+.block-2 .step-no { background: var(--green); }
+.block-3 .step-no { background: var(--gold); color: var(--navy); }
+
+.block-hint {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin: 0.6rem 0 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+}
+
+.full {
+    grid-column: 1 / 3;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--ink);
+}
+
+input,
+select {
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    outline: none;
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--white);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 4px rgba(46, 125, 91, 0.14);
+}
+
+.checkbox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+    margin-top: 1rem;
+}
+
+.checkbox label,
+.consent {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-size: 0.92rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.checkbox label:hover,
+.consent:hover {
+    border-color: var(--gold);
+    background: var(--cream);
+}
+
+.checkbox input,
+.consent input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--green);
+    flex-shrink: 0;
+}
+
+.consent {
+    margin-top: 0.8rem;
+    line-height: 1.4;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 50px;
+    background: var(--green);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+button[type="submit"]:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ================= FOOTER ================= */
+
+.mini-footer {
+    text-align: center;
+    padding: 1.6rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* ================= FOCUS VISIBLE ================= */
+
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: 1;
+    }
+
+    .checkbox {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form {
+        padding: 1.6rem;
+    }
+
+    .mini-header {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .checkbox {
+        grid-template-columns: 1fr;
+    }
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+}
+
+.full {
+    grid-column: 1 / 3;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--ink);
+}
+
+input,
+select {
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    outline: none;
+    font-size: 0.95rem;
+    font-family: var(--font-body);
+    color: var(--ink);
+    background: var(--white);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 4px rgba(46, 125, 91, 0.14);
+}
+
+.checkbox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.9rem;
+    margin-top: 1rem;
+}
+
+.checkbox label,
+.consent {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    font-size: 0.92rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.checkbox label:hover,
+.consent:hover {
+    border-color: var(--gold);
+    background: var(--cream);
+}
+
+.checkbox input,
+.consent input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--green);
+    flex-shrink: 0;
+}
+
+.consent {
+    margin-top: 0.8rem;
+    line-height: 1.4;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 50px;
+    background: var(--green);
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+button[type="submit"]:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ================= FOOTER ================= */
+
+.mini-footer {
+    text-align: center;
+    padding: 1.6rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+/* ================= FOCUS VISIBLE ================= */
+
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: 1;
+    }
+
+    .checkbox {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form {
+        padding: 1.6rem;
+    }
+
+    .mini-header {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .checkbox {
+        grid-template-columns: 1fr;
+    }
+}
