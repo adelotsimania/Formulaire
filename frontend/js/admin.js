@@ -132,14 +132,15 @@ function renderTable(rows, type) {
     </tr></thead><tbody>`;
 
     rows.forEach(row => {
-        // Détermination de l'URL de la photo (Fichier dans /uploads ou Base64 direct)
-        let photoUrl = "https://via.placeholder.com/50?text=Sns";
+        // Détermination de l'URL de la photo :
+        // - URL Cloudinary (https://...) -> utilisée telle quelle
+        // - Base64 (ancien format éventuel) -> utilisé tel quel
+        // - "default.jpg" ou vide -> placeholder
+        let photoUrl = "https://via.placeholder.com/50?text=Sans+photo";
 
         if (row.photo && row.photo !== "default.jpg") {
-            if (row.photo.startsWith("data:image")) {
+            if (row.photo.startsWith("http") || row.photo.startsWith("data:image")) {
                 photoUrl = row.photo;
-            } else {
-                photoUrl = `${BASE_URL}/uploads/${row.photo}`;
             }
         }
 
