@@ -47,6 +47,13 @@ pool.connect((err) => {
     }
 });
 
+// IMPORTANT : sans ce gestionnaire, une connexion fermée par Neon en arrière-plan
+// (ex: inactivité) fait planter TOUT le serveur Node.js (crash total).
+// On capture l'erreur ici pour que le serveur continue de tourner normalement.
+pool.on("error", (err) => {
+    console.error("⚠️ Erreur inattendue sur le pool PostgreSQL (serveur toujours actif) :", err.message);
+});
+
 // Fonction pour envoyer la chaîne Base64 vers Cloudinary et récupérer l'URL publique
 async function uploadBase64Image(photoData, prefix = "formation") {
     if (!photoData || typeof photoData !== "string" || !photoData.startsWith("data:image")) {
