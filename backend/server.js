@@ -3,6 +3,7 @@ const { Pool } = require("pg");
 const path = require("path");
 const cors = require("cors");
 const cloudinary = require("cloudinary").v2;
+const { Resend } = require("resend");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,10 +15,41 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // 2. CONFIGURATION CLOUDINARY (stockage persistant des photos)
 // Variable à définir sur Render : CLOUDINARY_URL="cloudinary://API_KEY:API_SECRET@CLOUD_NAME"
-// Le SDK Cloudinary détecte automatiquement cette variable d'environnement,
-// aucun cloudinary.config({...}) manuel n'est nécessaire.
 
-// 2bis. DOSSIER FRONTEND (sert le HTML/CSS/JS statique du frontend)
+// 2bis. CONFIGURATION RESEND (envoi d'emails de confirmation)
+// Variable à définir sur Render : RESEND_API_KEY
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// En mode test (sans domaine vérifié), Resend n'autorise l'envoi que vers cette adresse.
+// Remplace-la par la tienne si besoin. Une fois un domaine vérifié, on pourra
+// envoyer aux vraies adresses des inscrits.
+const TEST_EMAIL_RECEIVER = "adelotsimania@gmail.com";
+
+async function sendConfirmationEmail(destinataire, prenom, type) {
+    try {
+        const sujet = type === "adhesion"
+            ? "Confirmation de votre adhésion à FIMPISAVA"
+            : "Confirmation de votre inscription aux formations FIMPISAVA";
+
+        const texte = type === "adhesion"
+            ? `Bonjour ${prenom},\n\nVotre adhésion à FIMPISAVA a bien été enregistrée. Merci de nous avoir rejoints !\n\nL'équipe FIMPISAVA`
+            : `Bonjour ${prenom},\n\nVotre inscription aux formations FIMPISAVA a bien été enregistrée. Nous vous recontacterons prochainement.\n\nL'équipe FIMPISAVA`;
+
+        await resend.emails.send({
+            from: "FIMPISAVA <onboarding@resend.dev>",
+            to: TEST_EMAIL_RECEIVER,
+            subject: sujet,
+            text: texte
+        });
+
+        console.log(`📧 Email de confirmation envoyé (destinataire réel visé : ${destinataire})`);
+    } catch (err) {
+        // Un échec d'email ne doit jamais faire planter l'inscription elle-même
+        console.error("⚠️ Erreur envoi email (inscription quand même enregistrée) :", err.message);
+    }
+}
+
+// 2ter. DOSSIER FRONTEND (sert le HTML/CSS/JS statique du frontend)
 // Structure : FORMULAIRE/backend/server.js  et  FORMULAIRE/frontend/*
 const frontendDir = path.join(__dirname, "..", "frontend");
 app.use(express.static(frontendDir));
@@ -49,7 +81,6 @@ pool.connect((err) => {
 
 // IMPORTANT : sans ce gestionnaire, une connexion fermée par Neon en arrière-plan
 // (ex: inactivité) fait planter TOUT le serveur Node.js (crash total).
-// On capture l'erreur ici pour que le serveur continue de tourner normalement.
 pool.on("error", (err) => {
     console.error("⚠️ Erreur inattendue sur le pool PostgreSQL (serveur toujours actif) :", err.message);
 });
@@ -68,7 +99,7 @@ async function uploadBase64Image(photoData, prefix = "formation") {
         resource_type: "image"
     });
 
-    return result.secure_url; // URL https:// stockée directement en base
+    return result.secure_url;
 }
 
 // 4. ROUTE D'ADHESION
@@ -80,11 +111,9 @@ app.post("/adhesion", async (req, res) => {
     }
 
     try {
-        // 1. Upload de la photo vers Cloudinary
         const imageToSave = photoData || photo;
         const photoUrl = await uploadBase64Image(imageToSave, "adhesion");
 
-        // 2. Requête SQL PostgreSQL (placeholders $1, $2... + RETURNING id)
         const sql = `INSERT INTO adhesions
             (nom, prenom, email, telephone, filiere, adresse, province, region, district, sexe, created_at, photo)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW(), $11)
@@ -94,6 +123,10 @@ app.post("/adhesion", async (req, res) => {
 
         const result = await pool.query(sql, values);
         console.log(`✅ Adhésion réussie ! Photo : ${photoUrl}`);
+
+        // Envoi de l'email de confirmation (n'empêche pas la réponse si ça échoue)
+        sendConfirmationEmail(email, prenom, "adhesion");
+
         res.status(201).json({ message: "Adhésion enregistrée avec succès !", id: result.rows[0].id });
     } catch (err) {
         console.error("❌ Erreur Adhésion :", err.message);
@@ -123,6 +156,10 @@ app.post("/register", async (req, res) => {
 
         const result = await pool.query(sql, values);
         console.log(`✅ Inscription réussie ! Photo : ${photoUrl}`);
+
+        // Envoi de l'email de confirmation
+        sendConfirmationEmail(email, prenom, "formation");
+
         res.status(201).json({ message: "Inscription réussie !", id: result.rows[0].id, photoUrl });
     } catch (err) {
         console.error("❌ Erreur :", err.message);
@@ -149,7 +186,7 @@ app.get("/admin/formations", async (req, res) => {
     }
 });
 
-// 7. CATCH-ALL : sert index.html pour toute route non-API (navigation directe par URL)
+// 7. CATCH-ALL : sert index.html pour toute route non-API
 app.get(/^(?!\/(adhesion|register|admin)).*/, (req, res) => {
     res.sendFile(path.join(frontendDir, "index.html"));
 });
