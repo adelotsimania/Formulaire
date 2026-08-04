@@ -157,7 +157,15 @@ function renderTable(rows, type) {
             ? new Date(row.created_at).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })
             : "—";
 
-        html += `<tr>
+        // En formations, cliquer sur la ligne ouvre directement le reçu de versement.
+        // On coupe la propagation sur la photo de profil pour qu'elle ouvre plutôt la photo.
+        const rowClickAttr = isFormation
+            ? (preuveUrl
+                ? ` onclick="openModal('${preuveUrl}')" style="cursor:pointer;"`
+                : ` onclick="alert('Aucun reçu de versement n\\'a été téléversé pour cette inscription.')" style="cursor:pointer;"`)
+            : "";
+
+        html += `<tr${rowClickAttr}>
             <td class="muted">${row.id}</td>
             <td>
                 <div class="name-cell" style="display:flex; align-items:center; gap:10px;">
@@ -165,7 +173,7 @@ function renderTable(rows, type) {
                          alt="Photo" 
                          class="avatar-img" 
                          style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; cursor: pointer;"
-                         onclick="openModal('${photoUrl}')"
+                         onclick="event.stopPropagation(); openModal('${photoUrl}')"
                          onerror="this.onerror=null; this.src='https://via.placeholder.com/45?text=Photo';">
                     <div>
                         <div><strong>${escapeHtml(row.nom)}</strong> ${escapeHtml(row.prenom)}</div>
@@ -184,7 +192,7 @@ function renderTable(rows, type) {
                 : `<td>${escapeHtml(row.sexe)}</td>`}
             ${isFormation
                 ? `<td>${preuveUrl
-                        ? `<img src="${preuveUrl}" alt="Reçu de versement" class="avatar-img" style="width: 45px; height: 45px; border-radius: 8px; object-fit: cover; cursor: pointer;" onclick="openModal('${preuveUrl}')" onerror="this.onerror=null; this.src='https://via.placeholder.com/45?text=Reçu';">`
+                        ? `<img src="${preuveUrl}" alt="Reçu de versement" class="avatar-img" style="width: 45px; height: 45px; border-radius: 8px; object-fit: cover; cursor: pointer;" onclick="event.stopPropagation(); openModal('${preuveUrl}')" onerror="this.onerror=null; this.src='https://via.placeholder.com/45?text=Reçu';">`
                         : `<span class="muted">—</span>`}</td>`
                 : ""}
             <td class="muted">${formattedDate}</td>
