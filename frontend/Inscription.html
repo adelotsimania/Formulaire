@@ -41,6 +41,60 @@
             padding: 10px;
             border-radius: 8px;
         }
+
+        /* --- Navigation par étapes (Suivant / Précédent) --- */
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+        }
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .step-nav .btn-prev,
+        .step-nav .btn-next {
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+        }
+        .step-nav .btn-prev {
+            background-color: #eee;
+            color: #333;
+        }
+        .step-nav .btn-next {
+            background-color: #1c3d5a;
+            color: #fff;
+        }
+
+        /* --- Bloc paiement --- */
+        .payment-info {
+            background-color: #f6f3ec;
+            border: 1px solid #e0d9c8;
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .payment-info p {
+            margin: 0 0 8px 0;
+        }
+        .payment-info ul {
+            margin: 0 0 8px 0;
+            padding-left: 20px;
+        }
+        .payment-info .payment-number {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #1c3d5a;
+        }
     </style>
     <body>
     <script>
@@ -76,7 +130,7 @@
 
         <form id="inscription-form" class="form" novalidate>
 
-            <fieldset class="block block-1">
+            <fieldset class="block block-1 form-step active">
                 <legend><span class="step-no">01</span> Informations personnelles</legend>
 
                 <div class="grid">
@@ -138,10 +192,14 @@
                         <input type="hidden" id="photo-data" name="photoData" required>
                         <span class="error-text" id="photo-error-text">Veuillez prendre une photo.</span>
                     </div>
+
+                <div class="step-nav">
+                    <span></span>
+                    <button type="button" class="btn-next" data-next="2">Suivant <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </fieldset>
 
-            <fieldset class="block block-2">
+            <fieldset class="block block-2 form-step">
                 <legend><span class="step-no">02</span> Origine géographique</legend>
 
                 <div class="grid">
@@ -181,9 +239,14 @@
                         <span class="error-text">Veuillez choisir votre sexe.</span>
                     </div>
                 </div>
+
+                <div class="step-nav">
+                    <button type="button" class="btn-prev" data-prev="1"><i class="fa-solid fa-arrow-left"></i> Précédent</button>
+                    <button type="button" class="btn-next" data-next="3">Suivant <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
             </fieldset>
 
-            <fieldset class="block block-3">
+            <fieldset class="block block-3 form-step">
                 <legend><span class="step-no">03</span> Formations souhaitées</legend>
                 <p class="block-hint">Sélectionnez <strong>2 langues max</strong>. L'informatique peut être ajoutée en 3ᵉ option.</p>
 
@@ -208,9 +271,40 @@
                     
                     <span class="error-text" id="langue-error-text">Veuillez choisir au moins une option de formation.</span>
                 </div>
+
+                <div class="step-nav">
+                    <button type="button" class="btn-prev" data-prev="2"><i class="fa-solid fa-arrow-left"></i> Précédent</button>
+                    <button type="button" class="btn-next" data-next="4">Suivant <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
             </fieldset>
 
-            <button type="submit" id="submit-btn">S'inscrire</button>
+            <fieldset class="block block-4 form-step">
+                <legend><span class="step-no">04</span> Mode de paiement</legend>
+
+                <div class="payment-info">
+                    <p><strong>Frais de formation (par semestre) :</strong></p>
+                    <ul>
+                        <li>Étudiants originaires de la région <strong>SAVA</strong> : <strong>10 000 Ar</strong></li>
+                        <li>Étudiants des autres régions : <strong>15 000 Ar</strong></li>
+                    </ul>
+                    <p>Veuillez effectuer le versement au numéro :<br>
+                        <span class="payment-number">032 26 049 39</span>
+                    </p>
+                    <p>Une fois le paiement effectué, téléversez une capture d'écran ou une photo du reçu de versement ci-dessous.</p>
+                </div>
+
+                <div class="input-box full">
+                    <label for="preuve-paiement">Reçu de versement <span class="required-star">*</span></label>
+                    <input type="file" id="preuve-paiement" name="preuvePaiement" accept="image/*" capture="environment" required>
+                    <span class="error-text" id="preuve-error-text">Veuillez joindre une image du reçu de versement.</span>
+                </div>
+
+                <div class="step-nav">
+                    <button type="button" class="btn-prev" data-prev="3"><i class="fa-solid fa-arrow-left"></i> Précédent</button>
+                    <button type="submit" id="submit-btn">S'inscrire</button>
+                </div>
+            </fieldset>
+
         </form>
     </main>
 
@@ -225,6 +319,8 @@
             const infoCheckbox = document.querySelector('input[name="informatique"]');
             const languesContainer = document.getElementById('langues-container');
             const langueErrorText = document.getElementById('langue-error-text');
+            const preuvePaiementInput = document.getElementById('preuve-paiement');
+            const preuveErrorText = document.getElementById('preuve-error-text');
 
             // --- EXPRESSIONS RÉGULIÈRES (REGEX) ---
             const regexPatterns = {
@@ -275,7 +371,128 @@
                 });
             });
 
-            // 3. Validation globale au Submit avec REGEX
+            // 3. Validation d'un champ isolé (utilisée à la fois par étape et au submit)
+            const validateField = (field) => {
+                const value = field.value.trim();
+                const fieldName = field.name;
+                const pattern = regexPatterns[fieldName];
+                let isFieldValid = true;
+
+                if (!value) {
+                    isFieldValid = false;
+                } else if (pattern && !pattern.test(value)) {
+                    isFieldValid = false;
+                }
+
+                if (!isFieldValid) {
+                    field.classList.add('input-error');
+                    const errorMsg = field.parentElement.querySelector('.error-text');
+                    if (errorMsg) errorMsg.style.display = 'block';
+                } else {
+                    field.classList.remove('input-error');
+                    const errorMsg = field.parentElement.querySelector('.error-text');
+                    if (errorMsg) errorMsg.style.display = 'none';
+                }
+
+                return isFieldValid;
+            };
+
+            // 4. Validation de l'étape "photo de profil" (champ caché rempli par la caméra)
+            const validatePhotoStep = () => {
+                const photoDataInput = document.getElementById('photo-data');
+                const cameraBox = document.getElementById('camera-box');
+                const photoErrorText = document.getElementById('photo-error-text');
+                if (!photoDataInput.value) {
+                    cameraBox.classList.add('input-error');
+                    photoErrorText.style.display = 'block';
+                    return false;
+                }
+                cameraBox.classList.remove('input-error');
+                photoErrorText.style.display = 'none';
+                return true;
+            };
+
+            // 5. Validation de l'étape "formations souhaitées"
+            const validateFormationsStep = () => {
+                const checkedLangues = document.querySelectorAll('input[name="langues"]:checked');
+                const checkedInfo = document.querySelector('input[name="informatique"]:checked');
+                if (checkedLangues.length === 0 && !checkedInfo) {
+                    languesContainer.classList.add('checkbox-group-error');
+                    langueErrorText.style.display = 'block';
+                    return false;
+                }
+                languesContainer.classList.remove('checkbox-group-error');
+                langueErrorText.style.display = 'none';
+                return true;
+            };
+
+            // 6. Validation de l'étape "paiement"
+            const validatePaymentStep = () => {
+                if (!preuvePaiementInput.files || preuvePaiementInput.files.length === 0) {
+                    preuvePaiementInput.classList.add('input-error');
+                    preuveErrorText.style.display = 'block';
+                    return false;
+                }
+                preuvePaiementInput.classList.remove('input-error');
+                preuveErrorText.style.display = 'none';
+                return true;
+            };
+
+            if (preuvePaiementInput) {
+                preuvePaiementInput.addEventListener('change', () => {
+                    if (preuvePaiementInput.files && preuvePaiementInput.files.length > 0) {
+                        preuvePaiementInput.classList.remove('input-error');
+                        preuveErrorText.style.display = 'none';
+                    }
+                });
+            }
+
+            // --- NAVIGATION ENTRE ÉTAPES ---
+            const steps = Array.from(document.querySelectorAll('.form-step'));
+
+            const showStep = (stepNumber) => {
+                steps.forEach(step => step.classList.remove('active'));
+                const target = document.querySelector('.block-' + stepNumber);
+                if (target) {
+                    target.classList.add('active');
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            };
+
+            document.querySelectorAll('.btn-next').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const currentStep = btn.closest('.form-step');
+                    let stepIsValid = true;
+
+                    // Valider tous les champs texte/select requis de l'étape courante
+                    currentStep.querySelectorAll('input[required]:not([type="file"]):not([type="hidden"]), select[required]').forEach(field => {
+                        if (!validateField(field)) stepIsValid = false;
+                    });
+
+                    // Validations spécifiques par étape
+                    if (currentStep.classList.contains('block-1') && !validatePhotoStep()) {
+                        stepIsValid = false;
+                    }
+                    if (currentStep.classList.contains('block-3') && !validateFormationsStep()) {
+                        stepIsValid = false;
+                    }
+
+                    if (stepIsValid) {
+                        showStep(btn.dataset.next);
+                    } else {
+                        const firstError = currentStep.querySelector('.input-error, .checkbox-group-error');
+                        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            });
+
+            document.querySelectorAll('.btn-prev').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    showStep(btn.dataset.prev);
+                });
+            });
+
+            // 7. Validation globale au Submit avec REGEX (dernière étape)
             form.addEventListener('submit', (e) => {
                 let isValid = true;
                 let firstErrorElement = null;
@@ -286,47 +503,43 @@
                 languesContainer.classList.remove('checkbox-group-error');
 
                 // Validation par REGEX des champs texte/select
-                const requiredFields = form.querySelectorAll('input[required], select[required]');
+                const requiredFields = form.querySelectorAll('input[required]:not([type="file"]):not([type="hidden"]), select[required]');
                 
                 requiredFields.forEach(field => {
-                    const value = field.value.trim();
-                    const fieldName = field.name;
-                    const pattern = regexPatterns[fieldName];
-
-                    let isFieldValid = true;
-
-                    if (!value) {
-                        isFieldValid = false; // Champ vide
-                    } else if (pattern && !pattern.test(value)) {
-                        isFieldValid = false; // Non conforme au REGEX
-                    }
-
-                    if (!isFieldValid) {
+                    if (!validateField(field)) {
                         isValid = false;
-                        field.classList.add('input-error');
-
-                        const errorMsg = field.parentElement.querySelector('.error-text');
-                        if (errorMsg) errorMsg.style.display = 'block';
-
                         if (!firstErrorElement) firstErrorElement = field;
                     }
                 });
 
-                // Validation des options de formations
-                const checkedLangues = document.querySelectorAll('input[name="langues"]:checked');
-                const checkedInfo = document.querySelector('input[name="informatique"]:checked');
-
-                if (checkedLangues.length === 0 && !checkedInfo) {
+                // Validation de la photo de profil
+                if (!validatePhotoStep()) {
                     isValid = false;
-                    languesContainer.classList.add('checkbox-group-error');
-                    langueErrorText.style.display = 'block';
+                    if (!firstErrorElement) firstErrorElement = document.getElementById('camera-box');
+                }
+
+                // Validation des options de formations
+                if (!validateFormationsStep()) {
+                    isValid = false;
                     if (!firstErrorElement) firstErrorElement = languesContainer;
+                }
+
+                // Validation du reçu de versement
+                if (!validatePaymentStep()) {
+                    isValid = false;
+                    if (!firstErrorElement) firstErrorElement = preuvePaiementInput;
                 }
 
                 // Empêcher l'envoi du formulaire s'il y a des erreurs
                 if (!isValid) {
                     e.preventDefault();
                     if (firstErrorElement) {
+                        // S'assurer que l'étape contenant l'erreur est visible
+                        const parentStep = firstErrorElement.closest('.form-step');
+                        if (parentStep) {
+                            steps.forEach(step => step.classList.remove('active'));
+                            parentStep.classList.add('active');
+                        }
                         firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 }
