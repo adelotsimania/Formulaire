@@ -763,3 +763,121 @@ button:focus-visible {
         grid-template-columns: 1fr;
     }
 }
+
+form-step {
+    display: none;
+}
+ 
+.form-step.active {
+    display: block;
+}
+ 
+.block-4 {
+    border-left-color: var(--clay);
+}
+ 
+.block-4 .step-no {
+    background: var(--clay);
+}
+ 
+.step-nav {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.6rem;
+    flex-wrap: wrap;
+}
+ 
+.step-nav .btn-prev,
+.step-nav .btn-next,
+.step-nav button[type="submit"] {
+    flex: 1;
+    min-width: 140px;
+    width: auto;
+    margin-top: 0;
+    padding: 0.9rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+ 
+.step-nav .btn-next {
+    border: none;
+    background: var(--green);
+    color: var(--white);
+    box-shadow: var(--shadow-soft);
+}
+ 
+.step-nav .btn-next:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+ 
+.step-nav .btn-prev {
+    background: var(--cream);
+    color: var(--navy);
+    border: 1px solid var(--line);
+}
+ 
+.step-nav .btn-prev:hover {
+    border-color: var(--gold);
+    background: #f3ecd9;
+}
+ 
+/* ================= BLOC PAIEMENT ================= */
+ 
+.payment-info {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.4rem;
+    line-height: 1.6;
+}
+ 
+.payment-info p {
+    margin-bottom: 0.6rem;
+}
+ 
+.payment-info ul {
+    margin: 0 0 0.6rem 1.2rem;
+}
+ 
+.payment-info .payment-number {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--navy);
+}
+ 
+input[type="file"] {
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--white);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    width: 100%;
+    cursor: pointer;
+}
+ 
+/* ================= RESPONSIVE — ÉTAPES ================= */
+ 
+@media (max-width: 480px) {
+    .step-nav {
+        flex-direction: column;
+    }
+ 
+    .step-nav .btn-prev,
+    .step-nav .btn-next,
+    .step-nav button[type="submit"] {
+        width: 100%;
+    }
+ 
+    .payment-info {
+        padding: 1rem;
+    }
+}
+ 
