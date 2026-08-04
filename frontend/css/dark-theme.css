@@ -149,3 +149,46 @@
 .theme-toggle-btn:active {
     transform: scale(0.92);
 }
+
+
+
+
+
+
+/* --- Étape 04 : Mode de paiement --- */
+[data-theme="dark"] .payment-info {
+    background: #161f27;
+    border-color: #263038;
+    color: #dbe4e0;
+}
+
+[data-theme="dark"] .payment-info .payment-number {
+    color: #eaf1ec;
+}
+
+[data-theme="dark"] input[type="file"] {
+    background: #10161b;
+    border-color: #2a343d;
+    color: #9aa7b0;
+}
+
+/* --- Navigation Suivant / Précédent --- */
+[data-theme="dark"] .step-nav .btn-prev {
+    background: #161f27;
+    border-color: #2a343d;
+    color: #dbe4e0;
+}
+
+[data-theme="dark"] .step-nav .btn-prev:hover {
+    border-color: #d4b05f;
+    background: #1b242c;
+}
+
+[data-theme="dark"] .step-nav .btn-next {
+    background: #3d8f66;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .step-nav .btn-next:hover {
+    background: #2f7350;
+}
