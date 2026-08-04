@@ -61,7 +61,7 @@ const pool = process.env.DATABASE_URL
     ? new Pool({
         connectionString: process.env.DATABASE_URL,
         ssl: process.env.DB_SSL === "false" ? false : { rejectUnauthorized: false }
-      })
+    })
     : new Pool({
         host: process.env.DB_HOST || "localhost",
         user: process.env.DB_USER || "fimpisava_user",
@@ -69,7 +69,7 @@ const pool = process.env.DATABASE_URL
         database: process.env.DB_NAME || "fimpisava_db",
         port: process.env.DB_PORT || 5432,
         ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false
-      });
+    });
 
 pool.connect((err) => {
     if (err) {
@@ -136,31 +136,41 @@ app.post("/adhesion", async (req, res) => {
 
 // 5. ROUTE D'INSCRIPTION (/register)
 app.post("/register", async (req, res) => {
-    const { nom, prenom, email, tel, adresse, province, region, district, sexe, formations, photoData, photo } = req.body;
+    const {
+        nom, prenom, email, tel, adresse, province, region, district, sexe,
+        formations, photoData, photo, preuvePaiement, preuveVersement
+    } = req.body;
 
     if (!nom || !prenom) {
         return res.status(400).json({ error: "Le nom et le prénom sont obligatoires." });
     }
 
+    // Le reçu de versement est désormais obligatoire, comme les autres champs du formulaire.
+    const preuveImage = preuvePaiement || preuveVersement;
+    if (!preuveImage) {
+        return res.status(400).json({ error: "Le reçu de versement est obligatoire." });
+    }
+
     try {
         const imageToSave = photoData || photo;
         const photoUrl = await uploadBase64Image(imageToSave, "formation");
+        const preuvePaiementUrl = await uploadBase64Image(preuveImage, "paiement");
         const formationsText = Array.isArray(formations) ? formations.join(", ") : (formations || "Aucune");
 
         const sql = `INSERT INTO inscriptions_formations
-            (nom, prenom, email, telephone, adresse, province, region, district, sexe, formations, photo, created_at)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW())
+            (nom, prenom, email, telephone, adresse, province, region, district, sexe, formations, photo, preuve_paiement, created_at)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NOW())
             RETURNING id`;
 
-        const values = [nom, prenom, email, tel, adresse, province, region, district, sexe, formationsText, photoUrl];
+        const values = [nom, prenom, email, tel, adresse, province, region, district, sexe, formationsText, photoUrl, preuvePaiementUrl];
 
         const result = await pool.query(sql, values);
-        console.log(`✅ Inscription réussie ! Photo : ${photoUrl}`);
+        console.log(`✅ Inscription réussie ! Photo : ${photoUrl} | Reçu de versement : ${preuvePaiementUrl}`);
 
         // Envoi de l'email de confirmation
         sendConfirmationEmail(email, prenom, "formation");
 
-        res.status(201).json({ message: "Inscription réussie !", id: result.rows[0].id, photoUrl });
+        res.status(201).json({ message: "Inscription réussie !", id: result.rows[0].id, photoUrl, preuvePaiementUrl });
     } catch (err) {
         console.error("❌ Erreur :", err.message);
         res.status(500).json({ error: "Erreur lors de l'enregistrement." });
