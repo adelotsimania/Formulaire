@@ -764,7 +764,7 @@ button:focus-visible {
     }
 }
 
-form-step {
+.form-step {
     display: none;
 }
  
