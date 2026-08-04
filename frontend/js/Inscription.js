@@ -14,13 +14,23 @@ function showMessage(text, isError) {
     messageBox.scrollIntoView({ behavior: "smooth" });
 }
 
+// Convertit un fichier (input type="file") en chaîne Base64
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     // 1. Récupération des langues et de l'informatique
     const languesChecked = Array.from(document.querySelectorAll('input[name="langues"]:checked')).map(cb => cb.value);
     const infoChecked = document.querySelector('input[name="informatique"]:checked') ? 'Informatique' : null;
-    
+
     // Fusion des choix dans un seul tableau
     const formationsList = [...languesChecked];
     if (infoChecked) formationsList.push(infoChecked);
@@ -33,29 +43,45 @@ form.addEventListener("submit", async (e) => {
         return;
     }
 
+    // 3. Récupération du reçu de versement (champ obligatoire)
+    const preuveInput = document.getElementById("preuve-paiement");
+    const preuveFile = preuveInput && preuveInput.files ? preuveInput.files[0] : null;
+
+    if (!preuveFile) {
+        showMessage("Veuillez joindre une image du reçu de versement avant de valider !", true);
+        return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.textContent = "Envoi en cours...";
 
-    // 3. Construction de l'objet de données
-    const data = {
-        nom: document.getElementById("nom").value.trim(),
-        prenom: document.getElementById("prenom").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        tel: document.getElementById("tel").value.trim(),
-        adresse: document.getElementById("adresse").value.trim(),
-        province: document.getElementById("province").value.trim(),
-        region: document.getElementById("region").value.trim(),
-        district: document.getElementById("district").value.trim(),
-        sexe: document.getElementById("sexe").value,
-        
-        // Envoi sous les deux noms de variables pour compatibilité totale avec le serveur
-        photoData: photoBase64,
-        photo: photoBase64,
-        
-        formations: formationsList
-    };
-
     try {
+        // Conversion du reçu de versement en Base64
+        const preuvePaiementBase64 = await fileToBase64(preuveFile);
+
+        // 4. Construction de l'objet de données
+        const data = {
+            nom: document.getElementById("nom").value.trim(),
+            prenom: document.getElementById("prenom").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            tel: document.getElementById("tel").value.trim(),
+            adresse: document.getElementById("adresse").value.trim(),
+            province: document.getElementById("province").value.trim(),
+            region: document.getElementById("region").value.trim(),
+            district: document.getElementById("district").value.trim(),
+            sexe: document.getElementById("sexe").value,
+
+            // Envoi sous les deux noms de variables pour compatibilité totale avec le serveur
+            photoData: photoBase64,
+            photo: photoBase64,
+
+            // Reçu de versement, envoyé sous les deux noms pour compatibilité serveur
+            preuvePaiement: preuvePaiementBase64,
+            preuveVersement: preuvePaiementBase64,
+
+            formations: formationsList
+        };
+
         const response = await fetch(`${BASE_URL}/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -66,11 +92,11 @@ form.addEventListener("submit", async (e) => {
 
         if (response.ok) {
             form.reset();
-            
+
             // Masquer la photo de prévisualisation si présente
             const preview = document.getElementById("photo-preview");
             if (preview) preview.style.display = "none";
-            
+
             window.location.href = "confirmation.html?type=formation";
             return;
         } else {
