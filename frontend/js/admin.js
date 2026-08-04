@@ -128,6 +128,7 @@ function renderTable(rows, type) {
         ${isFormation ? "" : "<th>Filière</th>"}
         <th>Adresse</th><th>Origine</th>
         ${isFormation ? "<th>Formations</th>" : "<th>Sexe</th>"}
+        ${isFormation ? "<th>Reçu de versement</th>" : ""}
         <th>Date</th>
     </tr></thead><tbody>`;
 
@@ -141,6 +142,14 @@ function renderTable(rows, type) {
         if (row.photo && row.photo !== "default.jpg") {
             if (row.photo.startsWith("http") || row.photo.startsWith("data:image")) {
                 photoUrl = row.photo;
+            }
+        }
+
+        // Détermination de l'URL du reçu de versement (uniquement pour les inscriptions formations)
+        let preuveUrl = "";
+        if (row.preuve_paiement && row.preuve_paiement !== "default.jpg") {
+            if (row.preuve_paiement.startsWith("http") || row.preuve_paiement.startsWith("data:image")) {
+                preuveUrl = row.preuve_paiement;
             }
         }
 
@@ -173,6 +182,11 @@ function renderTable(rows, type) {
             ${isFormation
                 ? `<td><span class="badge">${escapeHtml(row.formations)}</span></td>`
                 : `<td>${escapeHtml(row.sexe)}</td>`}
+            ${isFormation
+                ? `<td>${preuveUrl
+                        ? `<img src="${preuveUrl}" alt="Reçu de versement" class="avatar-img" style="width: 45px; height: 45px; border-radius: 8px; object-fit: cover; cursor: pointer;" onclick="openModal('${preuveUrl}')" onerror="this.onerror=null; this.src='https://via.placeholder.com/45?text=Reçu';">`
+                        : `<span class="muted">—</span>`}</td>`
+                : ""}
             <td class="muted">${formattedDate}</td>
         </tr>`;
     });
