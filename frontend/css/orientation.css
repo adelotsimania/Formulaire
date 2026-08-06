@@ -245,6 +245,47 @@
     white-space: nowrap;
 }
 
+/* ---- Modes d'admission ---- */
+
+.admission-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 1.4rem;
+}
+
+.admission-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 0.3px;
+    padding: 0.28rem 0.7rem;
+    border-radius: 50px;
+    white-space: nowrap;
+}
+
+.admission-badge i {
+    font-size: 0.7rem;
+}
+
+.admission-concours {
+    background: rgba(178, 94, 66, 0.12);
+    color: var(--clay);
+}
+
+.admission-test {
+    background: rgba(196, 156, 74, 0.16);
+    color: #8a6c1f;
+}
+
+.admission-dossier {
+    background: rgba(58, 122, 90, 0.12);
+    color: var(--green-dark, var(--green));
+}
+
 .filiere-list {
     display: flex;
     flex-direction: column;
@@ -350,6 +391,7 @@
 
     .faculte-card summary {
         position: relative;
+        padding-right: 2.6rem;
     }
 }
 
@@ -383,6 +425,21 @@
 
 [data-theme="dark"] .faculte-series {
     background: #0f171e;
+}
+
+[data-theme="dark"] .admission-concours {
+    background: rgba(212, 133, 105, 0.18);
+    color: #e7a68c;
+}
+
+[data-theme="dark"] .admission-test {
+    background: rgba(212, 176, 95, 0.2);
+    color: #e3c586;
+}
+
+[data-theme="dark"] .admission-dossier {
+    background: rgba(96, 176, 138, 0.18);
+    color: #8fd4ac;
 }
 
 [data-theme="dark"] .filiere-list {
