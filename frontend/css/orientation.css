@@ -1,1 +1,258 @@
+/* =========================================================
+   FIMPISAVA — Page Orientation des nouveaux bacheliers
+   Réutilise les variables définies dans inscription.css (:root)
+   ========================================================= */
 
+.orientation-page {
+    max-width: 1000px;
+}
+
+/* ================= PRINCIPES ================= */
+
+.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+.principle-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.6rem 1.4rem;
+    box-shadow: var(--shadow-soft);
+    text-align: left;
+}
+
+.principle-card i {
+    font-size: 1.4rem;
+    color: var(--green);
+    margin-bottom: 0.8rem;
+    display: block;
+}
+
+.principle-card h3 {
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+}
+
+.principle-card p {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+}
+
+/* ================= SERIES ================= */
+
+.series-section h2,
+.cta-block h2 {
+    font-family: var(--font-title);
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.series-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    margin: 1.6rem 0 1.8rem;
+}
+
+.series-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--navy);
+    border-radius: var(--radius-md);
+    padding: 1.4rem 1.5rem;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.series-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.series-card.domaine-litteraire { border-left-color: var(--clay); }
+.series-card.domaine-scientifique { border-left-color: var(--green); }
+.series-card.domaine-technique { border-left-color: var(--gold); }
+
+.series-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+    color: var(--white);
+    background: var(--navy);
+    padding: 0.25rem 0.6rem;
+    border-radius: 50px;
+    margin-bottom: 0.7rem;
+}
+
+.domaine-litteraire .series-badge { background: var(--clay); }
+.domaine-scientifique .series-badge { background: var(--green); }
+.domaine-technique .series-badge { background: var(--gold); color: var(--navy); }
+
+.series-card h3 {
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--navy);
+    margin-bottom: 0.4rem;
+}
+
+.series-card > p {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.8rem;
+}
+
+.series-card ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.series-card li {
+    font-size: 0.85rem;
+    color: var(--ink);
+    padding-left: 1.1rem;
+    position: relative;
+}
+
+.series-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+}
+
+.official-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--navy);
+    border: 1px solid var(--line);
+    background: var(--cream);
+    padding: 0.7rem 1.1rem;
+    border-radius: 50px;
+    transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.official-link:hover {
+    border-color: var(--gold);
+    background: #f3ecd9;
+    transform: translateY(-2px);
+}
+
+/* ================= CTA ================= */
+
+.cta-block {
+    background: var(--navy);
+    border-radius: var(--radius-lg);
+    padding: 2.4rem;
+    margin-top: 3rem;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+}
+
+.cta-block h2 {
+    color: var(--white);
+}
+
+.cta-block p {
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 560px;
+    margin: 0 auto 1.6rem;
+    line-height: 1.6;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--green);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 0.9rem 1.6rem;
+    border-radius: 50px;
+    box-shadow: var(--shadow-soft);
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cta-button:hover {
+    background: var(--green-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+    .principles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .series-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-block {
+        padding: 1.8rem;
+    }
+}
+
+/* ================= MODE SOMBRE ================= */
+
+[data-theme="dark"] .principle-card,
+[data-theme="dark"] .series-card {
+    background: #161f27;
+    border-color: #263038;
+}
+
+[data-theme="dark"] .principle-card h3,
+[data-theme="dark"] .series-card h3,
+[data-theme="dark"] .series-section h2,
+[data-theme="dark"] .cta-block h2 {
+    color: #eaf1ec;
+}
+
+[data-theme="dark"] .principle-card p,
+[data-theme="dark"] .series-card > p,
+[data-theme="dark"] .series-card li {
+    color: #9aa7b0;
+}
+
+[data-theme="dark"] .official-link {
+    background: #161f27;
+    border-color: #2a343d;
+    color: #dbe4e0;
+}
+
+[data-theme="dark"] .official-link:hover {
+    border-color: #d4b05f;
+    background: #1b242c;
+}
+
+[data-theme="dark"] .cta-block {
+    background: #0b1622;
+}
+
+[data-theme="dark"] .cta-block p {
+    color: rgba(255, 255, 255, 0.75);
+}
