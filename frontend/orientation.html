@@ -1,1 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orientation des nouveaux bacheliers — FIMPISAVA</title>
+    <meta name="description" content="Guide d'orientation FIMPISAVA pour aider les nouveaux bacheliers à choisir leur filière, faculté ou école à Antananarivo.">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="css/inscription.css">
+    <link rel="stylesheet" href="css/orientation.css">
+    <link rel="stylesheet" href="css/dark-theme.css">
+    <link rel="icon" type="image/jpg" href="images/logo.jpg">
+
+    <script>
+        (function () {
+            const saved = localStorage.getItem("fimpisava-theme");
+            if (saved === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <header class="mini-header">
+        <a href="index.html" class="mini-logo">
+            <img src="images/logo.jpg" alt="Logo FIMPISAVA">
+            <div class="logo-text">
+                <span>FIMPISAVA</span>
+                <small>Fikambanana Mpianatra SAVA</small>
+            </div>
+        </a>
+        <button id="theme-toggle-btn" class="theme-toggle-btn">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </header>
+
+    <main class="page orientation-page">
+
+        <!-- ================= HERO ================= -->
+        <div class="page-intro">
+            <span class="eyebrow">FIMPISAVA — Orientation</span>
+            <h1>Bien choisir sa filière après le baccalauréat</h1>
+            <p>Chaque année, beaucoup de nouveaux bacheliers hésitent entre plusieurs facultés ou écoles.
+               Ce guide résume les grandes pistes selon votre série de bac, pour vous aider à faire un choix
+               plus éclairé avant la rentrée.</p>
+        </div>
+
+        <!-- ================= PRINCIPES ================= -->
+        <section class="principles-grid">
+            <div class="principle-card">
+                <i class="fa-solid fa-compass"></i>
+                <h3>Vos centres d'intérêt</h3>
+                <p>Une filière choisie par défaut, sans lien avec ce qui vous intéresse réellement,
+                   est la première cause d'échec en première année.</p>
+            </div>
+            <div class="principle-card">
+                <i class="fa-solid fa-briefcase"></i>
+                <h3>Les débouchés</h3>
+                <p>Renseignez-vous sur les métiers accessibles après chaque formation, pas seulement
+                   sur le nom de la filière.</p>
+            </div>
+            <div class="principle-card">
+                <i class="fa-solid fa-scale-balanced"></i>
+                <h3>Le rythme d'étude</h3>
+                <p>Certaines filières demandent un travail régulier et intensif dès la première année :
+                   mieux vaut le savoir avant de vous inscrire.</p>
+            </div>
+        </section>
+
+        <!-- ================= SERIES ================= -->
+        <section class="series-section">
+            <h2>Pistes selon votre série de bac</h2>
+            <p class="block-hint">Ces orientations sont indicatives : elles montrent les facultés et écoles
+               les plus souvent choisies pour chaque série, sans exclure d'autres possibilités.</p>
+
+            <div class="series-grid">
+
+                <article class="series-card domaine-litteraire">
+                    <span class="series-badge">A1 / A2</span>
+                    <h3>Séries littéraires</h3>
+                    <p>Profil orienté langues, lettres et sciences humaines.</p>
+                    <ul>
+                        <li>Faculté des Lettres et Sciences Humaines (FLSH)</li>
+                        <li>Faculté de Droit, d'Économie, de Gestion et Sociologie (DEGS)</li>
+                        <li>École Normale Supérieure (ENS), filières littéraires</li>
+                    </ul>
+                </article>
+
+                <article class="series-card domaine-litteraire">
+                    <span class="series-badge">L</span>
+                    <h3>Série littéraire (L)</h3>
+                    <p>Profil orienté droit, langues et sciences sociales.</p>
+                    <ul>
+                        <li>Faculté de Droit, d'Économie, de Gestion et Sociologie (DEGS)</li>
+                        <li>Faculté des Lettres et Sciences Humaines (FLSH)</li>
+                    </ul>
+                </article>
+
+                <article class="series-card domaine-scientifique">
+                    <span class="series-badge">C</span>
+                    <h3>Série scientifique (C)</h3>
+                    <p>Profil orienté mathématiques et sciences physiques.</p>
+                    <ul>
+                        <li>École Supérieure Polytechnique d'Antananarivo</li>
+                        <li>Faculté des Sciences</li>
+                        <li>Faculté de Droit, d'Économie, de Gestion et Sociologie (DEGS)</li>
+                    </ul>
+                </article>
+
+                <article class="series-card domaine-scientifique">
+                    <span class="series-badge">D</span>
+                    <h3>Série scientifique (D)</h3>
+                    <p>Profil orienté sciences de la vie et de la terre.</p>
+                    <ul>
+                        <li>Faculté de Médecine</li>
+                        <li>Faculté des Sciences</li>
+                        <li>École Supérieure des Sciences Agronomiques</li>
+                    </ul>
+                </article>
+
+                <article class="series-card domaine-scientifique">
+                    <span class="series-badge">S</span>
+                    <h3>Série scientifique (S)</h3>
+                    <p>Profil scientifique généraliste, mathématiques et sciences.</p>
+                    <ul>
+                        <li>Faculté des Sciences</li>
+                        <li>École Supérieure Polytechnique d'Antananarivo</li>
+                        <li>Faculté de Médecine (selon spécialisation)</li>
+                    </ul>
+                </article>
+
+                <article class="series-card domaine-technique">
+                    <span class="series-badge">Tech. Agricole</span>
+                    <h3>Technique agricole</h3>
+                    <p>Profil orienté agronomie et environnement.</p>
+                    <ul>
+                        <li>École Supérieure des Sciences Agronomiques</li>
+                    </ul>
+                </article>
+
+                <article class="series-card domaine-technique">
+                    <span class="series-badge">Tech. Industrielle</span>
+                    <h3>Technique industrielle &amp; génie civil</h3>
+                    <p>Profil orienté ingénierie et bâtiment.</p>
+                    <ul>
+                        <li>École Supérieure Polytechnique d'Antananarivo</li>
+                    </ul>
+                </article>
+
+                <article class="series-card domaine-technique">
+                    <span class="series-badge">G1 / G2 / G3</span>
+                    <h3>Technique tertiaire</h3>
+                    <p>Profil orienté gestion, comptabilité et commerce.</p>
+                    <ul>
+                        <li>Faculté de Droit, d'Économie, de Gestion et Sociologie (DEGS)</li>
+                    </ul>
+                </article>
+
+            </div>
+
+            <a href="https://www.univ-antananarivo.mg/orientation" target="_blank" rel="noopener" class="official-link">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                Faire le test d'orientation complet sur le site de l'Université d'Antananarivo
+            </a>
+        </section>
+
+        <!-- ================= CTA FIMPISAVA ================= -->
+        <section class="cta-block">
+            <h2>Quelle que soit votre filière, renforcez votre profil</h2>
+            <p>Une bonne maîtrise des langues et des outils informatiques fait la différence dans
+               n'importe quelle faculté ou école. FIMPISAVA propose des formations courtes pour
+               démarrer l'année universitaire avec de meilleures bases.</p>
+            <a href="inscription.html" class="cta-button">
+                Découvrir nos formations <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="mini-footer">
+        <p>© 2026 FIMPISAVA — Fikambanana Mpianatra SAVA</p>
+    </footer>
+
+    <script src="js/dark-toggle.js"></script>
+</body>
+</html>
