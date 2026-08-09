@@ -1,8 +1,7 @@
 /* =========================================================
    FIMPISAVA — Langues & Informatique
-   Palette : encre navy + vert baobab + or mangue (touche corail fine)
+   Palette : encre navy + vert baobab + or mangue
    Police  : Fraunces (titres) / Sora (texte) / Space Mono (étiquettes)
-   Signature : frise "Parcours FIMPISAVA" en étapes reliées
    ========================================================= */
 
 :root {
@@ -215,8 +214,6 @@ header nav ul li a:not(.btn-menu):hover::after {
 
 /* ================= HERO ================= */
 
-/* ================= HERO (MODIFIÉ SELON L'IMAGE) ================= */
-
 .hero {
     display: flex;
     flex-direction: column;
@@ -224,10 +221,8 @@ header nav ul li a:not(.btn-menu):hover::after {
     justify-content: center;
     text-align: center;
     padding: 6rem 1.5rem;
-    min-height: 80vh; /* Hauteur ajustée pour couvrir la bannière */
+    min-height: 80vh;
     position: relative;
-    
-    /* Image de fond avec filtre sombre (overlay) */
     background: 
         linear-gradient(rgba(10, 25, 47, 0.75), rgba(10, 25, 47, 0.75)), 
         url('../images/ecole.jpg');
@@ -245,7 +240,6 @@ header nav ul li a:not(.btn-menu):hover::after {
     align-items: center;
 }
 
-/* Badge jaune/orange au-dessus du titre */
 .hero .eyebrow {
     background: var(--gold);
     color: #000;
@@ -257,7 +251,6 @@ header nav ul li a:not(.btn-menu):hover::after {
     margin-bottom: 1.5rem;
 }
 
-/* Titre principal blanc et centré */
 .hero-text h1 {
     color: var(--white);
     font-size: clamp(2.5rem, 5vw, 4rem);
@@ -266,7 +259,6 @@ header nav ul li a:not(.btn-menu):hover::after {
     margin-bottom: 1.2rem;
 }
 
-/* Sous-titre / description */
 .hero-lead {
     color: rgba(255, 255, 255, 0.9);
     font-size: 1.15rem;
@@ -274,18 +266,16 @@ header nav ul li a:not(.btn-menu):hover::after {
     margin: 0 auto 2rem auto;
 }
 
-/* Alignement du bouton principal au centre */
 .hero-cta {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
     width: 100%;
-    margin-bottom: 0;
 }
 
-/* Style du bouton d'action orange */
 .hero-cta .btn {
-    background: #E8674B; /* Couleur orange/corail similaire à l'image */
+    background: var(--clay);
     color: var(--white);
     padding: 0.9rem 2.2rem;
     border-radius: 50px;
@@ -299,6 +289,17 @@ header nav ul li a:not(.btn-menu):hover::after {
     background: #d45337;
     transform: translateY(-2px);
 }
+
+.hero-cta .btn-ghost {
+    background: transparent;
+    border: 2px solid var(--white);
+    box-shadow: none;
+}
+
+.hero-cta .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
 /* ================= POURQUOI NOUS CHOISIR / CARDS ================= */
 
 .why, .services {
@@ -338,6 +339,7 @@ header nav ul li a:not(.btn-menu):hover::after {
 
 .services .card:nth-child(1) { border-bottom-color: var(--green); }
 .services .card:nth-child(2) { border-bottom-color: var(--navy); }
+.services .card:nth-child(3) { border-bottom-color: var(--gold); }
 
 .card:hover {
     transform: translateY(-6px);
@@ -371,7 +373,7 @@ header nav ul li a:not(.btn-menu):hover::after {
     font-size: 0.95rem;
 }
 
-/* ================= PARCOURS (signature) ================= */
+/* ================= PARCOURS ================= */
 
 .parcours {
     padding: 5.5rem 6%;
@@ -536,88 +538,164 @@ header nav ul li a:not(.btn-menu):hover::after {
 footer {
     background: var(--navy);
     color: #C9D3DC;
-    padding: 4rem 6% 1.5rem;
+    padding: 4.5rem 6% 1.8rem;
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr 1.3fr;
     gap: 2.5rem;
-    flex-wrap: wrap;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
 }
 
 .footer-logo h2 {
     color: var(--gold);
-    font-size: 1.3rem;
-    margin-bottom: 0.6rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
 }
 
 .footer-logo p {
     color: #9FADB9;
+    font-size: 0.93rem;
+    line-height: 1.6;
 }
 
 footer h3 {
     color: var(--white);
     font-family: var(--font-body);
-    font-size: 1rem;
-    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
 }
 
-.footer-links, .footer-contact {
+.footer-links, 
+.footer-contact {
     display: flex;
     flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-links a, 
+.footer-contact p a {
+    color: #9FADB9;
+    font-size: 0.92rem;
+    transition: color 0.25s ease, transform 0.25s ease;
+    display: inline-flex;
+    align-items: center;
     gap: 0.6rem;
 }
 
-.footer-links a, .footer-contact p {
-    color: #9FADB9;
-    transition: color 0.2s ease;
+.footer-links a i {
+    font-size: 0.7rem;
+    color: var(--gold);
+    transition: transform 0.25s ease;
 }
 
 .footer-links a:hover {
     color: var(--gold);
+    transform: translateX(4px);
 }
+
+.footer-contact a:hover {
+    color: var(--gold);
+}
+
+.footer-contact i {
+    color: var(--gold);
+    width: 16px;
+}
+
+/* --- SECTION SUIVEZ-NOUS --- */
 
 .footer-social {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
 }
 
-.footer-social a {
-    display: inline-flex;
-    color: var(--white);
-    background: rgba(255, 255, 255, 0.08);
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.65rem 1rem;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-btn .icon-box {
     width: 36px;
     height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
-    margin-top: 0.2rem;
-    transition: background 0.25s ease, transform 0.25s ease;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
-.footer-social a:hover {
+.social-btn .btn-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.social-btn .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #9FADB9;
+    letter-spacing: 0.5px;
+}
+
+.social-btn .title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--white);
+    transition: color 0.3s ease;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.social-btn:hover .icon-box {
     background: var(--gold);
     color: var(--navy);
-    transform: translateY(-3px);
+    transform: scale(1.05);
 }
+
+.social-btn:hover .title {
+    color: var(--gold);
+}
+
+/* --- BAS DU FOOTER --- */
 
 footer hr {
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.12);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
 }
 
 .copyright {
     text-align: center;
     color: #7C8B99;
     font-size: 0.85rem;
-    padding-bottom: 0.5rem;
 }
 
-/* ================= FOCUS VISIBLE (accessibilité) ================= */
+/* ================= ACCESSiBILITÉ ================= */
 
 a:focus-visible, .menu-toggle:focus-visible {
     outline: 2px solid var(--gold);
@@ -627,24 +705,10 @@ a:focus-visible, .menu-toggle:focus-visible {
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width: 900px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 3.5rem;
-    }
-
-    .hero-text {
-        max-width: 100%;
-    }
-
-    .hero-cta, .hero-stats {
-        justify-content: center;
-    }
-
-    .hero-image {
-        order: -1;
-        width: 100%;
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem 1.8rem;
     }
 
     .timeline {
@@ -723,7 +787,12 @@ a:focus-visible, .menu-toggle:focus-visible {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
     .hero {
         padding: 3rem 6% 4.5rem;
     }
@@ -733,7 +802,7 @@ a:focus-visible, .menu-toggle:focus-visible {
         width: 100%;
     }
 
-    .btn, .btn-ghost {
+    .hero-cta .btn, .hero-cta .btn-ghost {
         width: 100%;
         text-align: center;
     }
