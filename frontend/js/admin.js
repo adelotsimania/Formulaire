@@ -184,9 +184,10 @@ function renderTable(rows, type) {
                 ${escapeHtml(row.telephone || row.tel)}<br>
                 <small class="muted">${escapeHtml(row.email)}</small>
             </td>
-            ${isFormation ? "" : `<td>${escapeHtml(row.filiere)}</td>`}
+           ${isFormation ? "" : `<td>${escapeHtml(row.filiere)}</td>`}
             <td>${escapeHtml(row.adresse)}</td>
-            <td>${escapeHtml(row.region)} <small class="muted">(${escapeHtml(row.district || row.province)})</small></td>
+            <td>${escapeHtml(row.province)}</td>
+            <td>${escapeHtml(row.region)} <small class="muted">(${escapeHtml(row.district)})</small></td>
             ${isFormation
                 ? `<td><span class="badge">${escapeHtml(row.formations)}</span></td>`
                 : `<td>${escapeHtml(row.sexe)}</td>`}
