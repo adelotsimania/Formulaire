@@ -126,7 +126,7 @@ function renderTable(rows, type) {
     let html = `<table><thead><tr>
         <th>#</th><th>Nom &amp; Prénom</th><th>Contact</th>
         ${isFormation ? "" : "<th>Filière</th>"}
-        <th>Adresse</th><th>Origine</th>
+        <th>Adresse</th><th>Province</th><th>Origine</th>
         ${isFormation ? "<th>Formations</th>" : "<th>Sexe</th>"}
         ${isFormation ? "<th>Reçu de versement</th>" : ""}
         <th>Date</th>
