@@ -178,7 +178,30 @@ app.post("/register", async (req, res) => {
 });
 
 // 6. ROUTES ADMIN
-app.get("/admin/adhesions", async (req, res) => {
+// Middleware de vérification du mot de passe admin (authentification Basic)
+function checkAdminAuth(req, res, next) {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Basic ")) {
+        res.set("WWW-Authenticate", "Basic");
+        return res.status(401).json({ error: "Authentification requise." });
+    }
+
+    const base64Credentials = authHeader.split(" ")[1];
+    const credentials = Buffer.from(base64Credentials, "base64").toString("utf-8");
+    const [user, pass] = credentials.split(":");
+
+    const validUser = process.env.ADMIN_USER;
+    const validPass = process.env.ADMIN_PASS;
+
+    if (user === validUser && pass === validPass) {
+        return next();
+    }
+
+    return res.status(401).json({ error: "Identifiants incorrects." });
+}
+
+app.get("/admin/adhesions", checkAdminAuth, async (req, res) => {
     try {
         const result = await pool.query("SELECT * FROM adhesions ORDER BY id DESC");
         res.json(result.rows);
@@ -187,7 +210,7 @@ app.get("/admin/adhesions", async (req, res) => {
     }
 });
 
-app.get("/admin/formations", async (req, res) => {
+app.get("/admin/formations", checkAdminAuth, async (req, res) => {
     try {
         const result = await pool.query("SELECT * FROM inscriptions_formations ORDER BY id DESC");
         res.json(result.rows);
