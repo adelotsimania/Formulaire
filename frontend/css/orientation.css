@@ -207,6 +207,12 @@
     align-items: center;
     justify-content: space-between;
     gap: 0.4rem 1rem;
+    min-width: 0;
+}
+
+.faculte-name {
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .faculte-card summary::-webkit-details-marker {
@@ -381,6 +387,8 @@
     .faculte-card summary {
         flex-direction: column;
         align-items: flex-start;
+        position: relative;
+        padding-right: 2.6rem;
     }
 
     .faculte-card summary::after {
@@ -389,9 +397,17 @@
         right: 1.4rem;
     }
 
-    .faculte-card summary {
-        position: relative;
-        padding-right: 2.6rem;
+    .faculte-name,
+    .faculte-series,
+    .admission-badge {
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: break-word;
+        max-width: 100%;
+    }
+
+    .faculte-name {
+        width: 100%;
     }
 }
 
