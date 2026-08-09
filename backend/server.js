@@ -71,13 +71,13 @@ const pool = process.env.DATABASE_URL
         ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false
     });
 
-pool.connect((err) => {
-    if (err) {
-        console.error("❌ Erreur de connexion PostgreSQL :", err.message);
-    } else {
-        console.log("✅ Connecté à PostgreSQL");
-    }
-});
+// IMPORTANT : on utilise pool.query() (et non pool.connect()) pour ce test,
+// car pool.query() emprunte ET rend automatiquement la connexion.
+// pool.connect() garde la connexion ouverte indéfiniment si on ne la relâche
+// pas manuellement, ce qui provoquait un crash du serveur.
+pool.query("SELECT NOW()")
+    .then(() => console.log("✅ Connecté à PostgreSQL"))
+    .catch((err) => console.error("❌ Erreur de connexion PostgreSQL :", err.message));
 
 // IMPORTANT : sans ce gestionnaire, une connexion fermée par Neon en arrière-plan
 // (ex: inactivité) fait planter TOUT le serveur Node.js (crash total).
