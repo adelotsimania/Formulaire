@@ -1,7 +1,9 @@
-// Portage de js/config.js : adhesion.js lit une variable globale `API_URL` avec
-// un repli sur http://localhost:3000. En environnement Vite, l'équivalent est
-// une variable d'env préfixée VITE_ (à définir dans un .env / .env.production).
+// En dev (npm run dev), VITE_API_URL vient de .env → http://localhost:3000
+// (Vite et Express tournent sur deux ports différents).
 //
-// ⚠️ Je n'ai pas le contenu réel de js/config.js — si l'URL de prod n'est pas
-// http://localhost:3000, ajoute VITE_API_URL=... dans ton .env.
+// En prod sur le VPS, .env.production définit VITE_API_URL="" (vide) : le front
+// et l'API sont servis depuis le même domaine par server.js, donc les appels
+// peuvent être relatifs (fetch('/register') au lieu de fetch('https://.../register')).
+// Une chaîne vide reste une chaîne vide avec ??, donc le fallback ne s'applique
+// que si la variable est complètement absente.
 export const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
