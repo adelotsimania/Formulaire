@@ -75,7 +75,7 @@ const SERIES: SeriesCard[] = [
   },
   {
     badge: 'C', title: 'Série scientifique (C)', domaine: 'scientifique',
-    description: 'Profil orienté mathématiques et sciences physiques — accès le plus large.',
+    description: 'Profil orienté mathématiques et sciences physiques - accès le plus large.',
     items: [
       'Faculté des Sciences (tous portails, dont Maths-Info)',
       "École Supérieure Polytechnique d'Antananarivo (ESPA)",
@@ -95,7 +95,7 @@ const SERIES: SeriesCard[] = [
   },
   {
     badge: 'S', title: 'Série scientifique (S)', domaine: 'scientifique',
-    description: 'Profil scientifique généraliste — accès à tous les portails.',
+    description: 'Profil scientifique généraliste - accès à tous les portails.',
     items: [
       'Faculté des Sciences (tous portails)',
       'ESPA, Faculté de Médecine',
@@ -107,7 +107,7 @@ const SERIES: SeriesCard[] = [
     description: 'Profil orienté agronomie, élevage et environnement.',
     items: [
       'École Supérieure des Sciences Agronomiques (ESSA)',
-      'Faculté de Médecine — Médecine Vétérinaire',
+      'Faculté de Médecine - Médecine Vétérinaire',
     ],
   },
   {
@@ -115,7 +115,7 @@ const SERIES: SeriesCard[] = [
     description: 'Profil orienté ingénierie, bâtiment et industrie.',
     items: [
       'ESPA (génie civil, électrique, chimique, géologique, hydraulique)',
-      'Faculté des Sciences — portail Physique & Chimie, MIT',
+      'Faculté des Sciences - portail Physique & Chimie, MIT',
     ],
   },
 ];
@@ -131,7 +131,7 @@ const FACULTES: FaculteCard[] = [
   },
   {
     number: 2, name: "Faculté d'Économie, de Gestion et de Sociologie (EGS)", domaine: 'toutes', admission: 'test',
-    series: 'Priorité C, D, S, OSE — Série A accessible (Sociologie)',
+    series: 'Priorité C, D, S, OSE - Série A accessible (Sociologie)',
     filieres: [
       { title: 'Économie', debouches: 'Économiste de la santé, analyste financier, conseiller en banque' },
       { title: 'Gestion', debouches: 'Comptable, responsable des ressources humaines, chef de produit marketing' },
@@ -140,7 +140,7 @@ const FACULTES: FaculteCard[] = [
   },
   {
     number: 3, name: 'Faculté des Lettres et Sciences Humaines (FLSH)', domaine: 'litteraire', admission: 'concours',
-    series: 'Séries A, L, OSE prioritaires — ouverte aux séries C, D, S',
+    series: 'Séries A, L, OSE prioritaires - ouverte aux séries C, D, S',
     filieres: [
       { title: 'Études Françaises / Anglaises / Hispaniques / Germaniques / Russes', debouches: 'Traducteur, interprète, rédacteur web, enseignant' },
       { title: 'Malagasy', debouches: 'Enseignant, chercheur en linguistique, spécialiste en anthropologie' },
@@ -152,7 +152,7 @@ const FACULTES: FaculteCard[] = [
   },
   {
     number: 4, name: 'Faculté des Sciences', domaine: 'scientifique', admission: 'dossier',
-    series: 'Selon portail — voir détail ci-dessous',
+    series: 'Selon portail - voir détail ci-dessous',
     filieres: [
       { title: 'Portail Physique & Chimie', series: 'C, D, S, Bac technique E (Génie Industriel)', debouches: 'Technicien en métrologie, contrôleur qualité industrielle, assistant de recherche en laboratoire énergétique' },
       { title: 'Mathématiques et Informatique (MI)', series: 'C, S uniquement', debouches: 'Data scientist, ingénieur algorithmique, modélisateur mathématique, enseignant-chercheur' },
@@ -163,7 +163,7 @@ const FACULTES: FaculteCard[] = [
   },
   {
     number: 5, name: 'Faculté de Médecine', domaine: 'scientifique', admission: 'dossier',
-    series: 'Selon filière — voir détail ci-dessous',
+    series: 'Selon filière - voir détail ci-dessous',
     filieres: [
       { title: 'Médecine Vétérinaire', series: 'C, D, S et Bac technique agricole ou Techniques d\'Élevage', debouches: 'Médecin vétérinaire praticien, inspecteur sanitaire, cadre en nutrition animale' },
       { title: 'Médecine Humaine & Pharmacie', series: 'C, D, S', debouches: "Médecin généraliste, spécialiste, pharmacien d'officine, biologiste médical" },
@@ -194,7 +194,7 @@ const FACULTES: FaculteCard[] = [
   },
   {
     number: 8, name: 'École Normale Supérieure (ENS)', domaine: 'toutes', admission: 'concours',
-    series: 'Séries A, L, OSE (littéraires) — Séries C, D, S (scientifiques)',
+    series: 'Séries A, L, OSE (littéraires) - Séries C, D, S (scientifiques)',
     filieres: [
       { title: 'Formation des Enseignants (Lettres, Sciences, Langues)', debouches: "Enseignant certifié de lycée ou de collège, inspecteur de l'éducation nationale, concepteur de programmes scolaires" },
     ],
@@ -227,7 +227,7 @@ const Orientation = () => {
 
       {/* ================= HERO ================= */}
       <div className="page-intro">
-        <span className="eyebrow">FIMPISAVA — Orientation</span>
+        <span className="eyebrow">FIMPISAVA - Orientation</span>
         <h1>Bien choisir sa filière après le baccalauréat</h1>
         <p>
           Chaque année, beaucoup de nouveaux bacheliers hésitent entre plusieurs facultés ou écoles.
@@ -252,7 +252,7 @@ const Orientation = () => {
       <section className="series-section">
         <h2>Pistes selon votre série de bac</h2>
         <p className="block-hint">
-          Vue rapide et indicative. Le détail complet — filières précises et débouchés —
+          Vue rapide et indicative. Le détail complet - filières précises et débouchés -
           se trouve juste en dessous, faculté par faculté.
         </p>
 
@@ -309,7 +309,7 @@ const Orientation = () => {
                   <div className="filiere" key={filiere.title}>
                     <h4>
                       {filiere.title}
-                      {filiere.series && <span className="filiere-series"> — {filiere.series}</span>}
+                      {filiere.series && <span className="filiere-series"> - {filiere.series}</span>}
                     </h4>
                     <p><i className="fa-solid fa-briefcase" /> {filiere.debouches}</p>
                   </div>

@@ -23,7 +23,7 @@ const FormLayout = () => {
       <Outlet />
 
       <footer className="mini-footer">
-        <p>© 2026 FIMPISAVA — Fikambanana Mpianatra SAVA</p>
+        <p>© 2026 FIMPISAVA - Fikambanana Mpianatra SAVA</p>
       </footer>
     </>
   );

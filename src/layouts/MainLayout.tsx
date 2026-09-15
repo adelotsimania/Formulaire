@@ -1,12 +1,24 @@
-import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import logo from '../assets/images/logo.jpg';
 
 const MainLayout = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setMenuOpen((open) => !open);
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        // léger délai pour laisser le temps au DOM de la page de se peindre
+        requestAnimationFrame(() => el.scrollIntoView({ behavior: 'smooth' }));
+      }
+    }
+  }, [location]);
+
 
   return (
     <>
@@ -62,7 +74,7 @@ const MainLayout = () => {
         <div className="footer-container">
           <div className="footer-logo">
             <h2>FIMPISAVA</h2>
-            <p>Fikambanana Mpianatra SAVA — unis pour la réussite des étudiants SAVA à Antananarivo.</p>
+            <p>Fikambanana Mpianatra SAVA - unis pour la réussite des étudiants SAVA à Antananarivo.</p>
           </div>
 
           <div className="footer-links">

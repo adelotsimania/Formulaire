@@ -150,11 +150,6 @@
     transform: scale(0.92);
 }
 
-
-
-
-
-
 /* --- Étape 04 : Mode de paiement --- */
 [data-theme="dark"] .payment-info {
     background: #161f27;
@@ -191,4 +186,23 @@
 
 [data-theme="dark"] .step-nav .btn-next:hover {
     background: #2f7350;
+}
+
+[data-theme="dark"] header {
+    background: #0b1622;
+}
+
+[data-theme="dark"] footer {
+    background: #0a121c;
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .step-marker,
+[data-theme="dark"] .contact-box > div {
+    background: #161f27;
+    border-color: #263038;
+}
+
+[data-theme="dark"] .why {
+    background: #10161b;
 }

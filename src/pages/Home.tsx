@@ -10,12 +10,10 @@ const Home = () => {
       {/* ================= HERO ================= */}
       <section className="hero reveal" id="accueil">
         <div className="hero-text">
-          <span className="eyebrow">Fikambanana Mpianatra SAVA — Antananarivo</span>
+          <span className="eyebrow">Fikambanana Mpianatra SAVA - Antananarivo</span>
           <h1>Unis, on va plus loin. <em>Ensemble</em> pour la réussite.</h1>
           <p className="hero-lead">
-            FIMPISAVA rassemble les étudiants originaires de la région SAVA à Antananarivo.
-            Une association qui organise des formations, un encadrement solidaire entre membres,
-            et des activités qui gardent le lien avec notre région.
+            L'association des étudiants de la région SAVA à Antananarivo : entraide, formations et projets.
           </p>
           <div className="hero-cta">
             <Link to="/adhesion" className="btn">Devenir membre</Link>
@@ -32,18 +30,18 @@ const Home = () => {
         <div className="cards">
           <div className="card item-reveal">
             <i className="fa-solid fa-people-roof" />
-            <h3>Solidarité entre membres</h3>
-            <p>FIMPISAVA accueille les étudiants originaires de la région SAVA arrivant à Antananarivo et les accompagne tout au long de leur parcours.</p>
+            <h3>Solidarité</h3>
+            <p>Un réseau soudé pour réussir vos études à Tana.</p>
           </div>
           <div className="card item-reveal">
             <i className="fa-solid fa-chalkboard-user" />
-            <h3>Formations de qualité</h3>
-            <p>Des formations en langues et en informatique animées par des membres et intervenants qualifiés.</p>
+            <h3>Formations</h3>
+            <p>Des formations ciblées et un accompagnement sur mesure.</p>
           </div>
           <div className="card item-reveal">
             <i className="fa-solid fa-hands-helping" />
-            <h3>Racines &amp; entraide</h3>
-            <p>Garder le lien avec la région SAVA à travers des activités, des échanges et une communauté soudée.</p>
+            <h3>Racines</h3>
+            <p>Un pont permanent avec notre chère région SAVA.</p>
           </div>
         </div>
       </section>
@@ -57,27 +55,27 @@ const Home = () => {
           <div className="step item-reveal">
             <div className="step-marker"><i className="fa-solid fa-pen" /></div>
             <h3>Adhésion</h3>
-            <p>Un accueil personnalisé pour chaque nouvel étudiant originaire de la région SAVA.</p>
+            <p>Rejoignez la communauté.</p>
           </div>
           <div className="step item-reveal">
             <div className="step-marker"><i className="fa-solid fa-book-open" /></div>
-            <h3>Formations</h3>
-            <p><strong>Langues et Informatique, cours préparatoires</strong> avec un encadrement suivi tout au long de l'année.</p>
+            <h3>Accueil</h3>
+            <p>Intégrez le réseau et l'encadrement.</p>
           </div>
           <div className="step item-reveal">
             <div className="step-marker"><i className="fa-solid fa-bus" /></div>
-            <h3>Excursion</h3>
-            <p>Des sorties associatives pour renforcer les liens entre membres.</p>
+            <h3>Formation</h3>
+            <p>Développez vos compétences.</p>
           </div>
           <div className="step item-reveal">
             <div className="step-marker"><i className="fa-solid fa-comments" /></div>
-            <h3>Soutenance A2</h3>
-            <p>Une évaluation orale en anglais pour valider les acquis de la formation.</p>
+            <h3>Soutenance</h3>
+            <p>Validez vos acquis linguistiques.</p>
           </div>
           <div className="step item-reveal">
             <div className="step-marker"><i className="fa-solid fa-award" /></div>
-            <h3>Sortie de promotion</h3>
-            <p>Une célébration collective pour marquer la réussite de chaque promotion.</p>
+            <h3>Promotion</h3>
+            <p>Réussissez votre parcours.</p>
           </div>
         </div>
       </section>
@@ -89,18 +87,18 @@ const Home = () => {
         <div className="cards">
           <div className="card item-reveal">
             <i className="fa-solid fa-book" />
-            <h3>Cours préparatoire</h3>
-            <p>Afin d'accompagner les bacheliers souhaitant intégrer l'Université d'Antananarivo</p>
+            <h3>Encadrement</h3>
+            <p>Soutien académique et mentorat par les anciens.</p>
           </div>
           <div className="card item-reveal">
             <i className="fa-solid fa-language" />
             <h3>Langues</h3>
-            <p>Formation en langues pour préparer l'avenir des membres, avec une préparation dédiée au niveau A2 en anglais.</p>
+            <p>Ateliers pratiques et préparation au niveau A2 en anglais.</p>
           </div>
           <div className="card item-reveal">
             <i className="fa-solid fa-laptop-code" />
             <h3>Informatique</h3>
-            <p>Initiation à l'informatique : bureautique et programmation, pas à pas.</p>
+            <p>Initiation à la bureautique et programmation, pas à pas.</p>
           </div>
         </div>
       </section>
@@ -108,7 +106,7 @@ const Home = () => {
       {/* ================= CTA ORIENTATION ================= */}
       <section className="cta-block reveal">
         <h2>Orientation Scolaire et Professionnelle</h2>
-        <p>Trouvez la voie qui correspond à vos ambitions. Découvrez les filières accessibles selon votre série du Baccalauréat.</p>
+        <p>Trouvez la voie qui correspond à vos ambitions selon votre série du Baccalauréat.</p>
         <Link to="/orientation" className="cta-button">
           Orientation <i className="fa-solid fa-arrow-right" />
         </Link>

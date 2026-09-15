@@ -45,7 +45,7 @@ const Adhesion = () => {
     setErrors((prev) => ({ ...prev, [field]: false }));
   };
 
-  // adhesion.js ne fait qu'une vérification "non vide" — pas de regex, contrairement à Inscription
+  // adhesion.js ne fait qu'une vérification "non vide" - pas de regex, contrairement à Inscription
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setMessage(null);

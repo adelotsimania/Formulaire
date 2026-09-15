@@ -23,7 +23,7 @@ interface AdminRow {
   created_at?: string;
 }
 
-// via.placeholder.com a fermé en 2024 (DNS mort) — remplacé par placehold.co,
+// via.placeholder.com a fermé en 2024 (DNS mort) - remplacé par placehold.co,
 // un équivalent quasi drop-in. Absent de admin.js d'origine.
 const PHOTO_PLACEHOLDER = 'https://placehold.co/50x50?text=Sans+photo';
 const PHOTO_ERROR_FALLBACK = 'https://placehold.co/45x45?text=Photo';
@@ -163,7 +163,7 @@ const Admin = () => {
       {!loggedIn && (
         <div id="login-box">
           <h2>Espace Administration</h2>
-          <p className="subtitle">FIMPISAVA — connectez-vous pour continuer</p>
+          <p className="subtitle">FIMPISAVA - connectez-vous pour continuer</p>
           <form onSubmit={handleLogin}>
             <label htmlFor="username">Identifiant</label>
             <input
@@ -203,11 +203,11 @@ const Admin = () => {
             <div className="stats-row">
               <div className="stat-card">
                 <div className="label">Adhésions</div>
-                <div className="value">{stats.adhesions ?? '—'}</div>
+                <div className="value">{stats.adhesions ?? '-'}</div>
               </div>
               <div className="stat-card">
                 <div className="label">Inscrits aux formations</div>
-                <div className="value">{stats.formations ?? '—'}</div>
+                <div className="value">{stats.formations ?? '-'}</div>
               </div>
             </div>
 
@@ -267,7 +267,7 @@ const Admin = () => {
                         const preuveUrl = isFormation ? resolveImageUrl(row.preuve_paiement, '') : '';
                         const formattedDate = row.created_at
                           ? new Date(row.created_at).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })
-                          : '—';
+                          : '-';
 
                         const handleRowClick = isFormation
                           ? () => {
@@ -312,7 +312,7 @@ const Admin = () => {
                                     onClick={(e) => { e.stopPropagation(); setModalSrc(preuveUrl); }}
                                     onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = PREUVE_ERROR_FALLBACK; }}
                                   />
-                                ) : <span className="muted">—</span>}
+                                ) : <span className="muted">-</span>}
                               </td>
                             )}
                             <td className="muted">{formattedDate}</td>
