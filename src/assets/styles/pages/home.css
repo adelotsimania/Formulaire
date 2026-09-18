@@ -1,95 +1,20 @@
 /* =========================================================
-   FIMPISAVA — Langues & Informatique
-   Palette : encre navy + vert baobab + or mangue
-   Police  : Fraunces (titres) / Sora (texte) / Space Mono (étiquettes)
+   FIMPISAVA — Page d'accueil (Home.tsx)
+   Dépend de global/variables.css, global/reset.css,
+   global/layout.css et global/shared.css (déjà chargés
+   globalement par main.tsx — ne pas les réimporter ici).
    ========================================================= */
 
-:root {
-    --navy: #16324F;
-    --navy-soft: #1E4266;
-    --green: #2E7D5B;
-    --green-dark: #235F45;
-    --gold: #F2A93B;
-    --clay: #E8674B;
-    --cream: #FBF6EC;
-    --white: #FFFFFF;
-    --ink: #23303D;
-    --ink-soft: #5B6B7A;
-    --line: #E7E1D3;
-
-    --radius-lg: 22px;
-    --radius-md: 14px;
-    --shadow-soft: 0 12px 28px rgba(22, 50, 79, 0.08);
-    --shadow-hover: 0 18px 36px rgba(22, 50, 79, 0.14);
-
-    --font-title: 'Fraunces', serif;
-    --font-body: 'Sora', sans-serif;
-    --font-mono: 'Space Mono', monospace;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
 body {
-    font-family: var(--font-body);
     color: var(--ink);
     background: var(--white);
     line-height: 1.75;
     overflow-x: hidden;
 }
 
-h1, h2, h3 {
-    font-family: var(--font-title);
-    color: var(--navy);
-    line-height: 1.15;
-    font-weight: 600;
-}
-
 em {
     font-style: italic;
     color: var(--green);
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul {
-    list-style: none;
-}
-
-img {
-    max-width: 100%;
-    display: block;
-}
-
-.eyebrow {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--green);
-    background: rgba(46, 125, 91, 0.08);
-    padding: 0.35rem 0.9rem;
-    border-radius: 50px;
-    margin-bottom: 1rem;
-}
-
-.eyebrow.center {
-    display: block;
-    text-align: center;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 section h2 {
@@ -154,8 +79,8 @@ section h2 {
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(232, 103, 75, 0.3);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                box-shadow 0.3s ease, 
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease,
                 background-color 0.3s ease;
 }
 
@@ -178,8 +103,8 @@ section h2 {
     position: relative;
     overflow: hidden;
     box-shadow: var(--shadow-soft);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                box-shadow 0.3s ease, 
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.3s ease,
                 background-color 0.3s ease;
 }
 
@@ -197,7 +122,7 @@ section h2 {
     transform: translateX(5px);
 }
 
-/* ================= STYLES DE L'ANIMATION SCROLL REVEAL ================= */
+/* ================= SCROLL REVEAL ================= */
 
 .reveal {
     opacity: 0;
@@ -227,116 +152,6 @@ section h2 {
         transform: none !important;
         transition: none !important;
     }
-    * {
-        animation-duration: 0.001ms !important;
-        transition-duration: 0.001ms !important;
-    }
-}
-
-/* ================= HEADER ================= */
-
-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem 6%;
-    background: var(--navy);
-    box-shadow: var(--shadow-soft);
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-}
-
-.logo img {
-    width: 46px;
-    height: 46px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid var(--gold);
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
-
-.logo h2 {
-    font-size: 1.3rem;
-    color: var(--white);
-}
-
-.logo-sub {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--gold);
-    letter-spacing: 0.5px;
-}
-
-header nav ul {
-    display: flex;
-    align-items: center;
-    gap: 2.2rem;
-}
-
-header nav ul li a {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.88);
-    padding: 0.4rem 0;
-    position: relative;
-    transition: color 0.25s ease;
-}
-
-header nav ul li a:not(.btn-menu)::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0%;
-    height: 2px;
-    background: var(--gold);
-    border-radius: 3px;
-    transition: width 0.25s ease;
-}
-
-header nav ul li a:not(.btn-menu):hover {
-    color: var(--gold);
-}
-
-header nav ul li a:not(.btn-menu):hover::after {
-    width: 100%;
-}
-
-.btn-menu {
-    background: var(--gold);
-    color: var(--navy) !important;
-    padding: 0.55rem 1.4rem;
-    border-radius: 50px;
-    font-weight: 700;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-}
-
-.btn-menu:hover {
-    background: #ffb84f;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-}
-
-.menu-toggle {
-    display: none;
-    font-size: 1.5rem;
-    color: var(--white);
-    cursor: pointer;
 }
 
 /* ================= HERO ================= */
@@ -352,8 +167,8 @@ header nav ul li a:not(.btn-menu):hover::after {
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
-    background: 
-        linear-gradient(rgba(10, 25, 47, 0.75), rgba(10, 25, 47, 0.75)), 
+    background:
+        linear-gradient(rgba(10, 25, 47, 0.75), rgba(10, 25, 47, 0.75)),
         url('../images/ecole.jpg');
     background-size: cover;
     background-position: center;
@@ -555,7 +370,7 @@ header nav ul li a:not(.btn-menu):hover::after {
     margin: 0 auto;
 }
 
-/* ================= CTA ================= */
+/* ================= CTA (variante Home) ================= */
 
 .cta-block {
     background: var(--cream);
@@ -619,188 +434,9 @@ header nav ul li a:not(.btn-menu):hover::after {
     font-weight: 600;
 }
 
-/* ================= FOOTER ================= */
-
-footer {
-    background: var(--navy);
-    color: #D6DFE7;
-    padding: 4.5rem 6% 1.8rem;
-}
-
-.footer-container {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1.2fr 1.3fr;
-    gap: 2.5rem;
-    padding-bottom: 3rem;
-}
-
-.footer-logo h2 {
-    color: var(--gold);
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
-}
-
-.footer-logo p {
-    color: #D6DFE7;
-    font-size: 0.93rem;
-    line-height: 1.6;
-}
-
-footer h3 {
-    color: var(--white);
-    font-family: var(--font-body);
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-bottom: 1.2rem;
-}
-
-.footer-links, 
-.footer-contact {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.footer-links a, 
-.footer-contact p a {
-    color: #D6DFE7;
-    font-size: 0.92rem;
-    transition: color 0.25s ease, transform 0.25s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-.footer-links a i {
-    font-size: 0.7rem;
-    color: var(--gold);
-    transition: transform 0.25s ease;
-}
-
-.footer-links a:hover {
-    color: var(--gold);
-    transform: translateX(4px);
-}
-
-.footer-contact a:hover {
-    color: var(--gold);
-}
-
-.footer-contact i {
-    color: var(--gold);
-    width: 16px;
-}
-
-/* --- SECTION SUIVEZ-NOUS --- */
-
-.footer-social {
-    display: flex;
-    flex-direction: column;
-}
-
-.social-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-}
-
-.social-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.65rem 1rem;
-    border-radius: var(--radius-md);
-    transition: all 0.3s ease;
-    text-decoration: none;
-}
-
-.social-btn .icon-box {
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
-    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-
-.social-btn .btn-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
-}
-
-.social-btn .label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: #D6DFE7;
-    letter-spacing: 0.5px;
-}
-
-.social-btn .title {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--white);
-    transition: color 0.3s ease;
-}
-
-.social-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--gold);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-.social-btn:hover .icon-box {
-    background: var(--gold);
-    color: var(--navy);
-    transform: scale(1.05);
-}
-
-.social-btn:hover .title {
-    color: var(--gold);
-}
-
-section[id] {
-  scroll-margin-top: 90px;
-}
-
-/* --- BAS DU FOOTER --- */
-
-footer hr {
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    margin-bottom: 1.5rem;
-}
-
-.copyright {
-    text-align: center;
-    color: #9FADB9;
-    font-size: 0.85rem;
-}
-
-/* ================= ACCESSIBILITÉ ================= */
-
-a:focus-visible, .menu-toggle:focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
-    border-radius: 4px;
-}
-
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 992px) {
-    .footer-container {
-        grid-template-columns: 1fr 1fr;
-        gap: 2.5rem 1.8rem;
-    }
-
     .timeline {
         flex-direction: column;
         gap: 2.2rem;
@@ -844,33 +480,6 @@ a:focus-visible, .menu-toggle:focus-visible {
 }
 
 @media (max-width: 768px) {
-    header nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--navy);
-        box-shadow: var(--shadow-soft);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.35s ease;
-    }
-
-    header nav.active {
-        max-height: 420px;
-    }
-
-    header nav ul {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1.5rem 6%;
-        gap: 1.2rem;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
     .contact-box {
         flex-direction: column;
         align-items: center;
@@ -878,11 +487,6 @@ a:focus-visible, .menu-toggle:focus-visible {
 }
 
 @media (max-width: 576px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 2.0rem;
-    }
-
     .hero {
         padding: 6rem 1rem 1.5rem 1rem;
     }

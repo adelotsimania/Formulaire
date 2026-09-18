@@ -23,13 +23,13 @@ const MainLayout = () => {
   return (
     <>
       <header>
-        <div className="logo">
+        <a href="/" className="logo">
           <img src={logo} alt="Logo FIMPISAVA" />
           <div className="logo-text">
             <h2>FIMPISAVA</h2>
             <span className="logo-sub">Fikambanana Mpianatra SAVA</span>
           </div>
-        </div>
+        </a>
 
         <nav className={menuOpen ? 'active' : ''}>
           <ul>

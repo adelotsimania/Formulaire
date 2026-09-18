@@ -1,0 +1,31 @@
+/* =========================================================
+   FIMPISAVA — Variables globales
+   Palette : encre navy + vert baobab + or mangue
+   Police  : Fraunces (titres) / Sora (texte) / Space Mono (étiquettes)
+   Source unique : ne PAS redéfinir ces variables ailleurs
+   (utilisé par MainLayout, FormLayout, home.css, orientation.css,
+   inscription.css)
+   ========================================================= */
+
+:root {
+    --navy: #16324F;
+    --navy-soft: #1E4266;
+    --green: #2E7D5B;
+    --green-dark: #235F45;
+    --gold: #F2A93B;
+    --clay: #E8674B;
+    --cream: #FBF6EC;
+    --white: #FFFFFF;
+    --ink: #23303D;
+    --ink-soft: #5B6B7A;
+    --line: #E7E1D3;
+
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --shadow-soft: 0 12px 28px rgba(22, 50, 79, 0.08);
+    --shadow-hover: 0 18px 36px rgba(22, 50, 79, 0.14);
+
+    --font-title: 'Fraunces', serif;
+    --font-body: 'Sora', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+}

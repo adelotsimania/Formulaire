@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { useDarkTheme } from '../hooks/useDarkTheme';
 import { API_URL } from '../services/config';
 
+import '../assets/styles/pages/admin.css';
+
 type DataType = 'adhesions' | 'formations';
 
 interface AdminRow {

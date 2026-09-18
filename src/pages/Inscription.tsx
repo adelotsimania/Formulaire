@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useCameraCapture } from '../hooks/useCameraCapture';
 import { API_URL } from '../services/config';
 
+import '../assets/styles/pages/inscription.css';
+
 const REGEX_PATTERNS: Record<string, RegExp> = {
   nom: /^[a-zA-Zà-ÿÀ-Ÿ\s'-]{2,}$/,
   prenom: /^[a-zA-Zà-ÿÀ-Ÿ\s'-]{2,}$/,

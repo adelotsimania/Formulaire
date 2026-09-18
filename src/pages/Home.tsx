@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import '../assets/styles/home.css';
+import '../assets/styles/pages/home.css';
 
 const Home = () => {
   useScrollReveal();

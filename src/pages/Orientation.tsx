@@ -1,3 +1,5 @@
+import '../assets/styles/pages/orientation.css';
+
 type Domaine = 'litteraire' | 'scientifique' | 'technique' | 'toutes';
 type Admission = 'concours' | 'test' | 'dossier';
 
@@ -223,7 +225,7 @@ const ADMISSION_META: Record<Admission, { icon: string; label: string }> = {
 
 const Orientation = () => {
   return (
-    <main className="page orientation-page">
+    <div className="page orientation-page">
 
       {/* ================= HERO ================= */}
       <div className="page-intro">
@@ -271,7 +273,7 @@ const Orientation = () => {
 
         <a
           href="https://www.univ-antananarivo.mg/orientation"
-          target="_blank" rel="noopener" className="official-link"
+          target="_blank" rel="noopener noreferrer" className="official-link"
         >
           <i className="fa-solid fa-arrow-up-right-from-square" />
           Faire le test d'orientation complet sur le site de l'Université d'Antananarivo
@@ -333,7 +335,7 @@ const Orientation = () => {
         </a>
       </section>
 
-    </main>
+    </div>
   );
 };
 

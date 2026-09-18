@@ -1,5 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 
+import '../assets/styles/pages/confirmation.css'; 
+
 const Confirmation = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get('type');

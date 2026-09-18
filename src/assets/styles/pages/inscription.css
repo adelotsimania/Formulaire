@@ -1,152 +1,13 @@
 /* =========================================================
-   FIMPISAVA — Formulaire d'adhésion
-   Même système que accueil.css : navy / vert baobab / or mangue
+   FIMPISAVA — Formulaires (Inscription.tsx + Adhesion.tsx)
+   Dépend de global/variables.css, global/reset.css,
+   global/layout.css, global/shared.css (chargés globalement).
    ========================================================= */
-
-:root {
-    --navy: #16324F;
-    --navy-soft: #1E4266;
-    --green: #2E7D5B;
-    --green-dark: #235F45;
-    --gold: #F2A93B;
-    --clay: #E8674B;
-    --cream: #FBF6EC;
-    --white: #FFFFFF;
-    --ink: #23303D;
-    --ink-soft: #5B6B7A;
-    --line: #E7E1D3;
-
-    --radius-lg: 22px;
-    --radius-md: 14px;
-    --shadow-soft: 0 12px 28px rgba(22, 50, 79, 0.08);
-    --shadow-hover: 0 18px 36px rgba(22, 50, 79, 0.14);
-
-    --font-title: 'Fraunces', serif;
-    --font-body: 'Sora', sans-serif;
-    --font-mono: 'Space Mono', monospace;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--font-body);
-}
-
-html {
-    scroll-behavior: smooth;
-}
 
 body {
     background: var(--cream);
     color: var(--ink);
     min-height: 100vh;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-/* ================= MINI HEADER ================= */
-
-.mini-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.9rem 6%;
-    background: var(--navy);
-    box-shadow: var(--shadow-soft);
-}
-
-.mini-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-}
-
-.mini-logo img {
-    width: 42px;
-    height: 42px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid var(--gold);
-}
-
-.mini-logo .logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
-}
-
-.mini-logo .logo-text span {
-    font-family: var(--font-title);
-    font-weight: 600;
-    color: var(--white);
-    font-size: 1.05rem;
-}
-
-.mini-logo .logo-text small {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    color: var(--gold);
-    letter-spacing: 0.5px;
-}
-
-.back-link {
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: color 0.25s ease, transform 0.25s ease;
-}
-
-.back-link:hover {
-    color: var(--gold);
-    transform: translateX(-3px);
-}
-
-/* ================= PAGE ================= */
-
-.page {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 3.5rem 6% 5rem;
-}
-
-.page-intro {
-    text-align: center;
-    margin-bottom: 2.6rem;
-    animation: fadeUp 0.6s ease both;
-}
-
-.eyebrow {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--green);
-    background: rgba(46, 125, 91, 0.08);
-    padding: 0.35rem 0.9rem;
-    border-radius: 50px;
-    margin-bottom: 1rem;
-}
-
-.page-intro h1 {
-    font-family: var(--font-title);
-    font-weight: 600;
-    color: var(--navy);
-    font-size: clamp(1.8rem, 3.4vw, 2.4rem);
-    margin-bottom: 0.7rem;
-}
-
-.page-intro p {
-    color: var(--ink-soft);
-    max-width: 480px;
-    margin: 0 auto;
 }
 
 /* ================= FORM ================= */
@@ -312,7 +173,7 @@ button[type="submit"]:active {
     transform: translateY(0);
 }
 
-/* ================= ÉTAPES DU FORMULAIRE (multi-step) ================= */
+/* ================= ÉTAPES DU FORMULAIRE (multi-step, Inscription.tsx) ================= */
 
 .form-step {
     display: none;
@@ -405,43 +266,67 @@ input[type="file"] {
     cursor: pointer;
 }
 
-/* ================= FOOTER ================= */
+/* ================= CAMÉRA (Adhesion.tsx) ================= */
 
-.mini-footer {
-    text-align: center;
-    padding: 1.6rem;
-    color: var(--ink-soft);
-    font-size: 0.85rem;
+.camera-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius-md);
 }
 
-/* ================= ANIMATION ================= */
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(14px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.camera-video,
+.camera-preview {
+    max-width: 260px;
+    border-radius: var(--radius-md);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.001ms !important;
-        transition-duration: 0.001ms !important;
-    }
+.btn-camera {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 50px;
+    background: var(--green);
+    color: var(--white);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease;
 }
 
-/* ================= FOCUS VISIBLE ================= */
+.btn-camera:hover {
+    background: var(--green-dark);
+}
 
-a:focus-visible,
-input:focus-visible,
-select:focus-visible,
-button:focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 3px;
+.btn-camera-secondary {
+    background: var(--cream);
+    color: var(--navy);
+    border: 1px solid var(--line);
+}
+
+.required-star {
+    color: var(--clay);
+}
+
+.input-error {
+    border-color: var(--clay) !important;
+}
+
+.error-text {
+    color: var(--clay);
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+}
+
+#message-box {
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.6rem;
+    font-size: 0.9rem;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -461,12 +346,6 @@ button:focus-visible {
 
     .form {
         padding: 1.6rem;
-    }
-
-    .mini-header {
-        flex-direction: column;
-        gap: 0.8rem;
-        text-align: center;
     }
 }
 
