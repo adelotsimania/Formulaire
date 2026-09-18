@@ -1,13 +1,12 @@
 # FIMPISAVA
 
-Site de l'association FIMPISAVA (Fikambanana Mpianatra SAVA), réécrit en
-React + TypeScript (Vite) pour le frontend, avec un backend Express/PostgreSQL.
+Site de l'association FIMPISAVA (Fikambanana Mpianatra SAVA)
 
 ## Structure du projet
 
 ```
 fimpisava/          → frontend React (ce dossier)
-fimpisava/backend/   → API Express + PostgreSQL (server.js)
+fimpisava/backend/   → API Express + PostgreSQL
 ```
 
 ## Prérequis

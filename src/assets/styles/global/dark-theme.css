@@ -188,11 +188,11 @@
     background: #2f7350;
 }
 
-[data-theme="dark"] header {
+[data-theme="dark"] .site-header {
     background: #0b1622;
 }
 
-[data-theme="dark"] footer {
+[data-theme="dark"] .site-footer {
     background: #0a121c;
 }
 

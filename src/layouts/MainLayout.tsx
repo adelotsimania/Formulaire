@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import logo from '../assets/images/logo.jpg';
+import { useDarkTheme } from '../hooks/useDarkTheme';
 
 const MainLayout = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { theme, toggleTheme } = useDarkTheme();
 
   const toggleMenu = () => setMenuOpen((open) => !open);
   const closeMenu = () => setMenuOpen(false);
@@ -22,7 +24,7 @@ const MainLayout = () => {
 
   return (
     <>
-      <header>
+      <header className="site-header">
         <a href="/" className="logo">
           <img src={logo} alt="Logo FIMPISAVA" />
           <div className="logo-text">
@@ -47,22 +49,28 @@ const MainLayout = () => {
           </ul>
         </nav>
 
-        <div
-          className="menu-toggle"
-          id="menuToggle"
-          aria-label="Ouvrir le menu"
-          aria-expanded={menuOpen}
-          role="button"
-          tabIndex={0}
-          onClick={toggleMenu}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              toggleMenu();
-            }
-          }}
-        >
-          <i className="fa-solid fa-bars" />
+        <div className="header-actions">
+          <button className="theme-toggle-btn" onClick={toggleTheme} type="button" aria-label="Changer de thème">
+            <i className={theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'} />
+          </button>
+
+          <div
+            className="menu-toggle"
+            id="menuToggle"
+            aria-label="Ouvrir le menu"
+            aria-expanded={menuOpen}
+            role="button"
+            tabIndex={0}
+            onClick={toggleMenu}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleMenu();
+              }
+            }}
+          >
+            <i className="fa-solid fa-bars" />
+          </div>
         </div>
       </header>
 
@@ -70,7 +78,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
 
-      <footer>
+      <footer className="site-footer">
         <div className="footer-container">
           <div className="footer-logo">
             <h2>FIMPISAVA</h2>
