@@ -1,0 +1,4 @@
+node_modules/
+init-db.sql
+.env
+dist-server/
